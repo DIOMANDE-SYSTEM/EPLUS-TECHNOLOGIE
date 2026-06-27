@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EPLUS TECHNOLOGIE - La technologie du futur. Plateforme centrale de solutions numériques innovantes">
+    <meta name="keywords" content="EPLUS, technologie, digitalisation, solutions numériques, plateforme">
+    <title>EPLUS TECHNOLOGIE | La technologie du futur</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bleu-principal: #1565C0;
+            --orange-accent: #F57C00;
+            --vert-succes: #2E7D32;
+            --violet-ia: #6A1B9A;
+            --blanc: #FFFFFF;
+            --gris-texte: #263238;
+            --gris-clair: #F5F5F5;
+            --bleu-clair: #E3F2FD;
+            --orange-clair: #FFF3E0;
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--gris-texte);
+            background: var(--blanc);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ============ HEADER & NAVIGATION ============ */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(21, 101, 192, 0.1);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--bleu-principal) 0%, var(--violet-ia) 50%, var(--orange-accent) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            color: white;
+            font-size: 24px;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: rotate(5deg) scale(1.05);
+            box-shadow: 0 8px 25px rgba(21, 101, 192, 0.3);
+        }
+
+        .logo-text h1 {
+            font-size: 18px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--bleu-principal), var(--violet-ia));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text p {
+            font-size: 11px;
+            color: var(--orange-accent);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--gris-texte);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--bleu-principal), var(--orange-accent));
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--bleu-principal);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a.active {
+            color: var(--bleu-principal);
+        }
+
+        nav a.active::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--bleu-principal), var(--violet-ia));
+            color: white;
+            padding: 10px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(21, 101, 192, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(21, 101, 192, 0.4);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--gris-texte);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        /* ============ HERO SECTION ============ */
+        .hero {
+            margin-top: 70px;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--bleu-clair) 0%, #F3E5F5 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(245, 124, 0, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(106, 27, 154, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 56px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--bleu-principal), var(--violet-ia));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--gris-texte);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 500;
+        }
+
+        .tagline {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--orange-accent), #FF9100);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--bleu-principal), var(--violet-ia));
+            color: white;
+            padding: 16px 40px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+            transition: var(--transition);
+            box-shadow: 0 8px 25px rgba(21, 101, 192, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(21, 101, 192, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--bleu-principal);
+            padding: 16px 40px;
+            border: 2px solid var(--bleu-principal);
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 15px;
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bleu-clair);
+            transform: translateY(-3px);
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 42px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--bleu-principal), var(--orange-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--gris-texte);
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        /* ============ SECTIONS PRINCIPALES ============ */
+        section {
+            padding: 80px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 900;
+            margin-bottom: 50px;
+            color: var(--gris-texte);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--bleu-principal), var(--orange-accent));
+            border-radius: 2px;
+        }
+
+        /* ============ SECTION SERVICES ============ */
+        .services {
+            background: var(--gris-clair);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(21, 101, 192, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--bleu-principal), var(--orange-accent));
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(21, 101, 192, 0.15);
+            border-color: var(--bleu-principal);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--bleu-clair), #F3E5F5);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 32px;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            background: linear-gradient(135deg, var(--bleu-principal), var(--violet-ia));
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--gris-texte);
+        }
+
+        .service-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* ============ SECTION SOLUTIONS ============ */
+        .solutions {
+            background: white;
+        }
+
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .solution-card {
+            background: white;
+            border: 2px solid rgba(21, 101, 192, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .solution-header {
+            height: 150px;
+            background: linear-gradient(135deg, var(--bleu-principal), var(--violet-ia));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+        }
+
+        .solution-card:nth-child(2) .solution-header {
+            background: linear-gradient(135deg, var(--orange-accent), #FF9100);
+        }
+
+        .solution-card:nth-child(3) .solution-header {
+            background: linear-gradient(135deg, var(--vert-succes), #4CAF50);
+        }
+
+        .solution-card:nth-child(4) .solution-header {
+            background: linear-gradient(135deg, var(--violet-ia), #9C27B0);
+        }
+
+        .solution-card:nth-child(5) .solution-header {
+            background: linear-gradient(135deg, var(--bleu-principal), var(--vert-succes));
+        }
+
+        .solution-content {
+            padding: 30px;
+        }
+
+        .solution-content h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--gris-texte);
+        }
+
+        .solution-content p {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .solution-badge {
+            display: inline-block;
+            background: var(--orange-clair);
+            color: var(--orange-accent);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .solution-link {
+            color: var(--bleu-principal);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .solution-link:hover {
+            gap: 12px;
+        }
+
+        .solution-card:hover {
+            border-color: var(--bleu-principal);
+            box-shadow: 0 15px 40px rgba(21, 101, 192, 0.15);
+            transform: translateY(-8px);
+        }
+
+        /* ============ SECTION RÉALISATIONS ============ */
+        .realisations {
+            background: var(--gris-clair);
+        }
+
+        .realisation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .realisation-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+        }
+
+        .realisation-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .realisation-thumb {
+            height: 200px;
+            background: linear-gradient(135deg, var(--bleu-principal), var(--violet-ia));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 64px;
+        }
+
+        .realisation-info {
+            padding: 25px;
+        }
+
+        .realisation-category {
+            color: var(--orange-accent);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .realisation-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 10px 0;
+            color: var(--gris-texte);
+        }
+
+        .realisation-desc {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .realisation-link {
+            color: var(--bleu-principal);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+
+        .realisation-link:hover {
+            gap: 10px;
+        }
+
+        /* ============ SECTION STATISTIQUES ============ */
+        .stats-section {
+            background: linear-gradient(135deg, var(--bleu-principal), var(--violet-ia));
+            color: white;
+            margin: 80px 20px;
+            border-radius: 20px;
+            padding: 60px 20px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 50px;
+            text-align: center;
+        }
+
+        .stat-box h3 {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .stat-box p {
+            font-size: 14px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* ============ SECTION CONTACT ============ */
+        .contact {
+            background: white;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 50px;
+            align-items: center;
+        }
+
+        .contact-info h3 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: var(--gris-texte);
+        }
+
+        .contact-item {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--bleu-clair);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .contact-item:nth-child(2) .contact-icon {
+            background: var(--orange-clair);
+        }
+
+        .contact-item:nth-child(3) .contact-icon {
+            background: linear-gradient(135deg, #C8E6C9, #A5D6A7);
+        }
+
+        .contact-details h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: var(--gris-texte);
+        }
+
+        .contact-details p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--gris-texte);
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 12px 16px;
+            border: 2px solid rgba(21, 101, 192, 0.2);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--bleu-principal);
+            box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--bleu-principal), var(--violet-ia));
+            color: white;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(21, 101, 192, 0.3);
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            background: var(--gris-texte);
+            color: white;
+            padding: 60px 20px 30px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            font-size: 16px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: var(--orange-accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--orange-accent);
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                display: none;
+            }
+
+            nav.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 30px;
+                gap: 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .hero h2 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            section {
+                padding: 50px 20px;
+            }
+
+            .services-grid,
+            .solutions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============ ANIMATIONS ============ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-in {
+            animation: slideInRight 0.6s ease-out;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(245, 124, 0, 0);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(245, 124, 0, 0.3);
+            }
+        }
+
+        .glow:hover {
+            animation: glow 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- ============ HEADER & NAVIGATION ============ -->
+    <header id="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">E</div>
+                <div class="logo-text">
+                    <h1>EPLUS</h1>
+                    <p>TECHNOLOGIE</p>
+                </div>
+            </div>
+
+            <nav id="navbar">
+                <ul>
+                    <li><a href="#accueil" class="nav-link active" data-section="accueil">Accueil</a></li>
+                    <li><a href="#services" class="nav-link" data-section="services">Services</a></li>
+                    <li><a href="#solutions" class="nav-link" data-section="solutions">Solutions</a></li>
+                    <li><a href="#realisations" class="nav-link" data-section="realisations">Réalisations</a></li>
+                    <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <a href="#contact" class="cta-button">Commencer</a>
+        </div>
+    </header>
+
+    <!-- ============ HERO SECTION ============ -->
+    <section class="hero" id="accueil">
+        <div class="hero-content fade-in">
+            <div class="tagline">🚀 La transformation numérique simplifiée</div>
+            <h2>EPLUS, la technologie du futur</h2>
+            <p>Découvrez l'écosystème numérique complet pour la digitalisation de votre administration, entreprise ou établissement scolaire</p>
+
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="scrollToSection('solutions')">Explorer nos solutions</button>
+                <button class="btn-secondary" onclick="scrollToSection('contact')">Nous contacter</button>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">14+</div>
+                    <div class="stat-label">Solutions développées</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100k+</div>
+                    <div class="stat-label">Utilisateurs actifs</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Établissements partenaires</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ SECTION SERVICES ============ -->
+    <section class="services" id="services">
+        <h2 class="section-title">Nos Services</h2>
+
+        <div class="services-grid">
+            <div class="service-card fade-in">
+                <div class="service-icon">💻</div>
+                <h3>Maintenance Informatique</h3>
+                <p>Support technique complet pour vos infrastructures informatiques, dépannage, maintenance préventive et corrective.</p>
+            </div>
+
+            <div class="service-card fade-in" style="animation-delay: 0.1s">
+                <div class="service-icon">⚙️</div>
+                <h3>Développement Web</h3>
+                <p>Création de sites web modernes, responsifs et optimisés pour le SEO. Solutions adaptées à votre métier.</p>
+            </div>
+
+            <div class="service-card fade-in" style="animation-delay: 0.2s">
+                <div class="service-icon">📱</div>
+                <h3>Développement Mobile</h3>
+                <p>Applications Android et iOS sur mesure pour étendre votre présence sur mobile et améliorer l'expérience utilisateur.</p>
+            </div>
+
+            <div class="service-card fade-in" style="animation-delay: 0.3s">
+                <div class="service-icon">🔒</div>
+                <h3>Cybersécurité</h3>
+                <p>Protection de vos données contre les menaces. Audit de sécurité, conseils et mise en place de protections robustes.</p>
+            </div>
+
+            <div class="service-card fade-in" style="animation-delay: 0.4s">
+                <div class="service-icon">☁️</div>
+                <h3>Hébergement Cloud</h3>
+                <p>Hébergement sécurisé et fiable de vos applications. Scalabilité automatique, sauvegardes et disponibilité garantie.</p>
+            </div>
+
+            <div class="service-card fade-in" style="animation-delay: 0.5s">
+                <div class="service-icon">🎓</div>
+                <h3>Formations Professionnelles</h3>
+                <p>Formations en informatique, développement web, gestion de projets et transformation numérique adaptées à vos besoins.</p>
+            </div>
+
+            <div class="service-card fade-in" style="animation-delay: 0.6s">
+                <div class="service-icon">🤖</div>
+                <h3>Intelligence Artificielle</h3>
+                <p>Solutions IA personnalisées pour automatiser vos processus, analyser vos données et prendre meilleures décisions.</p>
+            </div>
+
+            <div class="service-card fade-in" style="animation-delay: 0.7s">
+                <div class="service-icon">📊</div>
+                <h3>Digitalisation</h3>
+                <p>Transformation numérique complète de votre administration ou entreprise. Conseil, implémentation et accompagnement.</p>
+            </div>
+
+            <div class="service-card fade-in" style="animation-delay: 0.8s">
+                <div class="service-icon">📞</div>
+                <h3>Support Technique</h3>
+                <p>Assistance technique 24/7 pour tous vos besoins. Hotline, email, chat en direct avec experts qualifiés.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ SECTION SOLUTIONS ============ -->
+    <section class="solutions" id="solutions">
+        <h2 class="section-title">Nos Solutions</h2>
+
+        <div class="solutions-grid">
+            <div class="solution-card fade-in">
+                <div class="solution-header">🎓</div>
+                <div class="solution-content">
+                    <div class="solution-badge">Education</div>
+                    <h3>LE PERROQUET PGNEP</h3>
+                    <p>Plateforme complète de gestion pédagogique pour l'école primaire. Gestion des notes, bulletins et suivi élève.</p>
+                    <a href="#" class="solution-link">Accéder →</a>
+                </div>
+            </div>
+
+            <div class="solution-card fade-in" style="animation-delay: 0.1s">
+                <div class="solution-header">🏫</div>
+                <div class="solution-content">
+                    <div class="solution-badge">Écoles</div>
+                    <h3>EPLUS GES-ÉCOLES</h3>
+                    <p>Gestion complète et intégrée de vos établissements scolaires. Scolarité, administratif et finances.</p>
+                    <a href="#" class="solution-link">Accéder →</a>
+                </div>
+            </div>
+
+            <div class="solution-card fade-in" style="animation-delay: 0.2s">
+                <div class="solution-header">🔧</div>
+                <div class="solution-content">
+                    <div class="solution-badge">Informatique</div>
+                    <h3>EPLUS Maintenance</h3>
+                    <p>Gestion du parc informatique et des interventions techniques. Suivis en temps réel et rapports détaillés.</p>
+                    <a href="#" class="solution-link">Accéder →</a>
+                </div>
+            </div>
+
+            <div class="solution-card fade-in" style="animation-delay: 0.3s">
+                <div class="solution-header">📚</div>
+                <div class="solution-content">
+                    <div class="solution-badge">Formation</div>
+                    <h3>EPLUS Learning</h3>
+                    <p>Plateforme complète de formation en ligne avec cours, quizz, certifications et suivi d'apprentissage.</p>
+                    <a href="#" class="solution-link">Accéder →</a>
+                </div>
+            </div>
+
+            <div class="solution-card fade-in" style="animation-delay: 0.4s">
+                <div class="solution-header">📄</div>
+                <div class="solution-content">
+                    <div class="solution-badge">Documents</div>
+                    <h3>EPLUS GED</h3>
+                    <p>Gestion électronique des documents sécurisée. Archivage, recherche et partage simplifié.</p>
+                    <a href="#" class="solution-link">Accéder →</a>
+                </div>
+            </div>
+
+            <div class="solution-card fade-in" style="animation-delay: 0.5s">
+                <div class="solution-header">👥</div>
+                <div class="solution-content">
+                    <div class="solution-badge">RH</div>
+                    <h3>EPLUS RH</h3>
+                    <p>Gestion complète des ressources humaines. Paies, congés, absences et gestion d'équipe centralisées.</p>
+                    <a href="#" class="solution-link">Accéder →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ SECTION STATISTIQUES ============ -->
+    <div class="stats-section fade-in">
+        <div class="stats-grid">
+            <div class="stat-box">
+                <h3>98%</h3>
+                <p>Satisfaction client</p>
+            </div>
+            <div class="stat-box">
+                <h3>24/7</h3>
+                <p>Support disponible</p>
+            </div>
+            <div class="stat-box">
+                <h3>50ms</h3>
+                <p>Temps de réponse moyen</p>
+            </div>
+            <div class="stat-box">
+                <h3>99.9%</h3>
+                <p>Disponibilité garantie</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ SECTION RÉALISATIONS ============ -->
+    <section class="realisations" id="realisations">
+        <h2 class="section-title">Nos Réalisations</h2>
+
+        <div class="realisation-grid">
+            <div class="realisation-item fade-in">
+                <div class="realisation-thumb">🏛️</div>
+                <div class="realisation-info">
+                    <div class="realisation-category">Portail institutionnel</div>
+                    <div class="realisation-title">Portail MENAET</div>
+                    <div class="realisation-desc">Plateforme numérique du Ministère de l'Éducation pour la gestion des établissements scolaires.</div>
+                    <a href="#" class="realisation-link">Voir le projet →</a>
+                </div>
+            </div>
+
+            <div class="realisation-item fade-in" style="animation-delay: 0.1s">
+                <div class="realisation-thumb">🎨</div>
+                <div class="realisation-info">
+                    <div class="realisation-category">Design & Branding</div>
+                    <div class="realisation-title">Site web CAFOP</div>
+                    <div class="realisation-desc">Plateforme complète pour le Centre d'Animation et de Formation Pédagogique.</div>
+                    <a href="#" class="realisation-link">Voir le projet →</a>
+                </div>
+            </div>
+
+            <div class="realisation-item fade-in" style="animation-delay: 0.2s">
+                <div class="realisation-thumb">📈</div>
+                <div class="realisation-info">
+                    <div class="realisation-category">Application métier</div>
+                    <div class="realisation-title">Tableau de bord analytique</div>
+                    <div class="realisation-desc">Système de reporting et d'analyse pour décideurs avec visualisations avancées.</div>
+                    <a href="#" class="realisation-link">Voir le projet →</a>
+                </div>
+            </div>
+
+            <div class="realisation-item fade-in" style="animation-delay: 0.3s">
+                <div class="realisation-thumb">📚</div>
+                <div class="realisation-info">
+                    <div class="realisation-category">Éducation</div>
+                    <div class="realisation-title">LE PERROQUET PGNEP</div>
+                    <div class="realisation-desc">Plateforme de remontée et gestion des notes des élèves avec suivi pédagogique en temps réel.</div>
+                    <a href="https://diomande-system.github.io/le-perroquet_pgnep_remonte_notes_eleves" class="realisation-link" target="_blank">Voir le projet →</a>
+                </div>
+            </div>
+
+            <div class="realisation-item fade-in" style="animation-delay: 0.4s">
+                <div class="realisation-thumb">🏫</div>
+                <div class="realisation-info">
+                    <div class="realisation-category">Gestion Scolaire</div>
+                    <div class="realisation-title">EPLUS GES-ÉCOLES</div>
+                    <div class="realisation-desc">Plateforme complète IEPP pour la gestion intégrée des établissements et la coordination pédagogique.</div>
+                    <a href="https://diomande-system.github.io/Plateforme-IEPP" class="realisation-link" target="_blank">Voir le projet →</a>
+                </div>
+            </div>
+
+            <div class="realisation-item fade-in" style="animation-delay: 0.5s">
+                <div class="realisation-thumb">👁️</div>
+                <div class="realisation-info">
+                    <div class="realisation-category">Visite Virtuelle</div>
+                    <div class="realisation-title">Visite CDP MENAET</div>
+                    <div class="realisation-desc">Plateforme interactive de visite virtuelle du Centre de Documentation Pédagogique du MENAET.</div>
+                    <a href="https://diomande-system.github.io/visite_site_cdp_menaet" class="realisation-link" target="_blank">Voir le projet →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ SECTION CONTACT ============ -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Nous Contacter</h2>
+
+        <div class="contact-container">
+            <div class="contact-info fade-in">
+                <h3>Restons connectés</h3>
+
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-details">
+                        <h4>Adresse</h4>
+                        <p>Abidjan, Koumassi 32<br>Rue Martin Luther King<br>Côte d'Ivoire</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-details">
+                        <h4>Email</h4>
+                        <p><a href="mailto:diomyaya28@gmail.com" style="color: inherit; text-decoration: none;">diomyaya28@gmail.com</a><br><a href="mailto:diomyaya28@yahoo.fr" style="color: inherit; text-decoration: none;">diomyaya28@yahoo.fr</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-details">
+                        <h4>Téléphone</h4>
+                        <p><a href="tel:0140995877" style="color: inherit; text-decoration: none;">+225 01 40 99 58 77</a><br><a href="tel:0749237462" style="color: inherit; text-decoration: none;">+225 07 49 23 74 62</a></p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <h4 style="margin-bottom: 15px;">Suivez-nous</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/1bUwJ1KUjQ/" class="social-link" target="_blank" title="Facebook">f</a>
+                        <a href="https://wa.me/2250749237462" class="social-link" target="_blank" title="WhatsApp">💬</a>
+                        <a href="#" class="social-link" title="LinkedIn">in</a>
+                        <a href="#" class="social-link" title="YouTube">▶</a>
+                    </div>
+                </div>
+            </div>
+
+            <form class="contact-form fade-in" style="animation-delay: 0.1s" onsubmit="handleContactForm(event)">
+                <div class="form-group">
+                    <label for="name">Nom complet</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Sujet</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Envoyer le message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>À Propos d'EPLUS</h4>
+                <ul>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#solutions">Solutions</a></li>
+                    <li><a href="#realisations">Réalisations</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Nos Solutions</h4>
+                <ul>
+                    <li><a href="#">LE PERROQUET PGNEP</a></li>
+                    <li><a href="#">EPLUS GES-ÉCOLES</a></li>
+                    <li><a href="#">EPLUS Learning</a></li>
+                    <li><a href="#">EPLUS Maintenance</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Centre d'aide</a></li>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Support technique</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Entreprise</h4>
+                <ul>
+                    <li><a href="#">Qui sommes-nous ?</a></li>
+                    <li><a href="#">Politique de confidentialité</a></li>
+                    <li><a href="#">Conditions d'utilisation</a></li>
+                    <li><a href="#">Nous rejoindre</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 EPLUS TECHNOLOGIE. Tous droits réservés. | EPLUS, la technologie du futur</p>
+        </div>
+    </footer>
+
+    <script>
+        // ============ NAVIGATION ============
+        const menuToggle = document.getElementById('menuToggle');
+        const navbar = document.getElementById('navbar');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        menuToggle.addEventListener('click', () => {
+            navbar.classList.toggle('active');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navbar.classList.remove('active');
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            });
+        });
+
+        // ============ SMOOTH SCROLL ============
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // ============ CONTACT FORM ============
+        function handleContactForm(event) {
+            event.preventDefault();
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value,
+                timestamp: new Date().toISOString()
+            };
+
+            // Sauvegarder dans localStorage
+            let messages = JSON.parse(localStorage.getItem('eplus_messages') || '[]');
+            messages.push(formData);
+            localStorage.setItem('eplus_messages', JSON.stringify(messages));
+
+            alert('✅ Message envoyé avec succès ! Nous vous recontacterons bientôt.');
+            event.target.reset();
+        }
+
+        // ============ ANIMATIONS ============
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in, .slide-in').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // ============ HEADER STICKY ============
+        let lastScroll = 0;
+        const header = document.getElementById('header');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // ============ ACTIVE NAV LINK ============
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const scrollPosition = window.scrollY + 100;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionBottom = sectionTop + section.offsetHeight;
+
+                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    const activeLink = document.querySelector(`[data-section="${section.id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
