@@ -913,6 +913,201 @@
         .glow:hover {
             animation: glow 2s infinite;
         }
+
+        /* ============ EXTENSION : FLASH INFO, ANNONCES, PUBLICITÉ, ASSISTANT IA ============ */
+        .hero { margin-top: 106px; }
+        section { scroll-margin-top: 110px; }
+        nav ul { gap: 22px; }
+        nav a { font-size: 13.5px; }
+
+        .flash-bar {
+            position: fixed; top: 70px; left: 0; right: 0; height: 36px; z-index: 900;
+            display: flex; align-items: stretch; overflow: hidden;
+            background: linear-gradient(90deg, #BF360C, var(--orange-accent), #FF9100, var(--orange-accent), #BF360C);
+            background-size: 300% 100%; animation: flashBg 12s linear infinite;
+            color: #fff; font-size: 13px; font-weight: 600;
+            box-shadow: 0 3px 12px rgba(245,124,0,0.35);
+        }
+        @keyframes flashBg { to { background-position: 300% 0; } }
+        .flash-label {
+            display: flex; align-items: center; gap: 8px; padding: 0 16px; flex-shrink: 0;
+            background: var(--gris-texte); letter-spacing: 1px; font-weight: 800; font-size: 12px;
+        }
+        .live-dot { width: 9px; height: 9px; border-radius: 50%; background: #FF5252; animation: pulseDot 1.2s infinite; }
+        @keyframes pulseDot { 0% { box-shadow: 0 0 0 0 rgba(255,82,82,.8);} 100% { box-shadow: 0 0 0 10px rgba(255,82,82,0);} }
+        .flash-track { flex: 1; overflow: hidden; display: flex; align-items: center; }
+        .flash-move { display: inline-flex; white-space: nowrap; animation: flashScroll 45s linear infinite; }
+        .flash-track:hover .flash-move { animation-play-state: paused; }
+        .flash-move span { padding: 0 38px; position: relative; }
+        .flash-move span::after { content: '◆'; position: absolute; right: -6px; opacity: .7; font-size: 10px; }
+        @keyframes flashScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        .ext-sub { color: #666; max-width: 720px; margin: -20px 0 35px; font-size: 15px; }
+
+        /* Bannière publicitaire rotative */
+        .ad-rotator { position: relative; border-radius: 16px; overflow: hidden; height: 130px; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(106,27,154,.2); }
+        .ad-slide {
+            position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; gap: 20px;
+            padding: 0 40px; color: #fff; opacity: 0; transform: translateX(30px); transition: opacity .6s, transform .6s; pointer-events: none;
+        }
+        .ad-slide.on { opacity: 1; transform: none; pointer-events: auto; }
+        .ad-slide h3 { font-size: 24px; font-weight: 800; }
+        .ad-slide p { font-size: 14px; opacity: .92; }
+        .ad-slide .ad-tag { font-size: 10px; letter-spacing: 1px; background: rgba(0,0,0,.28); padding: 3px 9px; border-radius: 10px; display: inline-block; margin-bottom: 6px; }
+        .ad-slide a { background: #fff; color: var(--gris-texte); padding: 10px 22px; border-radius: 25px; font-weight: 700; font-size: 13px; text-decoration: none; white-space: nowrap; }
+        .ad-dots { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; }
+        .ad-dots i { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.5); cursor: pointer; }
+        .ad-dots i.on { background: #fff; }
+
+        /* Annonces */
+        .ann-toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; align-items: center; }
+        .chip { border: 2px solid rgba(21,101,192,.25); background: #fff; color: var(--bleu-principal); padding: 7px 18px; border-radius: 25px; font-weight: 600; font-size: 13px; cursor: pointer; transition: var(--transition); }
+        .chip:hover, .chip.on { background: linear-gradient(135deg, var(--bleu-principal), var(--violet-ia)); color: #fff; border-color: transparent; }
+        .ann-search { margin-left: auto; padding: 9px 16px; border: 2px solid rgba(21,101,192,.2); border-radius: 25px; min-width: 220px; font-family: inherit; }
+        .ann-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; align-items: start; }
+        .ann-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .ann-card { background: #fff; border-radius: 14px; padding: 22px; border-left: 5px solid var(--bleu-principal); box-shadow: 0 4px 15px rgba(0,0,0,.07); transition: var(--transition); }
+        .ann-card:hover { transform: translateY(-5px); box-shadow: 0 14px 30px rgba(21,101,192,.15); }
+        .ann-card[data-cat="Emploi"] { border-color: var(--vert-succes); }
+        .ann-card[data-cat="Formation"] { border-color: var(--violet-ia); }
+        .ann-card[data-cat="Événement"] { border-color: var(--orange-accent); }
+        .ann-card[data-cat="Offre"] { border-color: #C62828; }
+        .ann-cat { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--orange-accent); }
+        .ann-card h4 { font-size: 17px; margin: 8px 0; }
+        .ann-card p { font-size: 13.5px; color: #555; line-height: 1.6; }
+        .ann-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; font-size: 12px; color: #888; gap: 8px; }
+        .ann-del { background: none; border: none; color: #C62828; cursor: pointer; font-size: 12px; font-weight: 600; }
+        .ann-empty { grid-column: 1 / -1; text-align: center; color: #888; padding: 30px; }
+        .ext-panel { background: #fff; border-radius: 16px; padding: 26px; box-shadow: 0 8px 28px rgba(21,101,192,.12); border-top: 5px solid var(--orange-accent); }
+        .ext-panel h3 { font-size: 19px; margin-bottom: 16px; }
+        .ext-panel .form-group { margin-bottom: 14px; }
+        .ext-panel select { padding: 12px 16px; border: 2px solid rgba(21,101,192,.2); border-radius: 8px; font-family: inherit; font-size: 14px; }
+        .ext-check { display: flex; gap: 8px; align-items: center; font-size: 13px; margin-bottom: 14px; }
+        .ext-note { font-size: 12px; color: #888; margin-top: 10px; line-height: 1.5; }
+        .ext-ok { color: var(--vert-succes); font-weight: 600; font-size: 13px; margin-top: 10px; }
+
+        /* Publicité */
+        .pub-section { background: linear-gradient(135deg, #F3E5F5 0%, var(--bleu-clair) 100%); max-width: none; }
+        .pub-inner { max-width: 1360px; margin: 0 auto; }
+        .pub-formats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; margin-bottom: 50px; }
+        .pub-card { background: #fff; border-radius: 16px; padding: 30px; text-align: center; position: relative; overflow: hidden; transition: var(--transition); border: 2px solid transparent; }
+        .pub-card:hover { transform: translateY(-8px); border-color: var(--orange-accent); box-shadow: 0 18px 40px rgba(245,124,0,.2); }
+        .pub-card.star::before { content: '★ POPULAIRE'; position: absolute; top: 14px; right: -34px; transform: rotate(40deg); background: var(--orange-accent); color: #fff; font-size: 10px; font-weight: 800; padding: 4px 40px; }
+        .pub-ico { font-size: 40px; margin-bottom: 12px; }
+        .pub-card h3 { font-size: 19px; margin-bottom: 8px; }
+        .pub-card p { font-size: 13.5px; color: #666; margin-bottom: 14px; }
+        .pub-card ul { list-style: none; text-align: left; font-size: 13px; margin-bottom: 16px; }
+        .pub-card li { padding: 4px 0; }
+        .pub-card li::before { content: '✓ '; color: var(--vert-succes); font-weight: 800; }
+        .pub-price { font-weight: 800; color: var(--bleu-principal); font-size: 14px; }
+        .pub-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+        .pub-slots { display: grid; gap: 16px; }
+        .pub-slot { border: 3px dashed rgba(106,27,154,.35); border-radius: 14px; background: rgba(255,255,255,.7); display: flex; align-items: center; justify-content: center; text-align: center; color: var(--violet-ia); font-weight: 700; padding: 10px; }
+        .pub-slot small { display: block; font-weight: 500; color: #777; margin-top: 4px; }
+        .pub-slot.lead { height: 90px; } .pub-slot.rect { height: 160px; } .pub-slot.sky { height: 90px; }
+
+        /* Assistant IA */
+        .ai-fab { position: fixed; right: 22px; bottom: 22px; z-index: 1200; width: 62px; height: 62px; border-radius: 50%; border: none; cursor: pointer; font-size: 28px; color: #fff; background: linear-gradient(135deg, var(--violet-ia), var(--bleu-principal), var(--orange-accent)); background-size: 200% 200%; animation: flashBg 6s linear infinite, fabPulse 2.5s infinite; box-shadow: 0 10px 30px rgba(106,27,154,.45); }
+        @keyframes fabPulse { 0%,100% { transform: scale(1);} 50% { transform: scale(1.08);} }
+        .ai-panel { position: fixed; right: 22px; bottom: 96px; z-index: 1200; width: 360px; max-width: calc(100vw - 30px); height: 480px; max-height: calc(100vh - 130px); background: #fff; border-radius: 18px; box-shadow: 0 20px 60px rgba(0,0,0,.28); display: none; flex-direction: column; overflow: hidden; }
+        .ai-panel.open { display: flex; animation: fadeInUp .35s ease-out; }
+        .ai-head { background: linear-gradient(135deg, var(--bleu-principal), var(--violet-ia)); color: #fff; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; }
+        .ai-head b { font-size: 15px; } .ai-head small { display: block; opacity: .85; font-size: 11px; }
+        .ai-head button { background: none; border: none; color: #fff; font-size: 22px; cursor: pointer; }
+        .ai-body { flex: 1; overflow-y: auto; padding: 14px; background: #F7F9FC; display: flex; flex-direction: column; gap: 10px; }
+        .ai-msg { max-width: 86%; padding: 10px 14px; border-radius: 14px; font-size: 13.5px; line-height: 1.5; white-space: pre-line; }
+        .ai-msg.bot { background: #fff; border: 1px solid rgba(21,101,192,.12); align-self: flex-start; border-bottom-left-radius: 4px; }
+        .ai-msg.me { background: linear-gradient(135deg, var(--bleu-principal), var(--violet-ia)); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+        .ai-quick { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 12px 0; background: #F7F9FC; }
+        .ai-quick button { font-size: 11.5px; padding: 5px 11px; border-radius: 15px; border: 1px solid rgba(21,101,192,.3); background: #fff; color: var(--bleu-principal); cursor: pointer; font-weight: 600; }
+        .ai-form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid #eee; background: #F7F9FC; }
+        .ai-form input { flex: 1; padding: 10px 14px; border: 2px solid rgba(21,101,192,.2); border-radius: 22px; font-family: inherit; font-size: 13.5px; }
+        .ai-form button { background: linear-gradient(135deg, var(--bleu-principal), var(--violet-ia)); color: #fff; border: none; border-radius: 22px; padding: 0 18px; font-weight: 700; cursor: pointer; }
+
+        @media (max-width: 900px) {
+            .ann-layout, .pub-layout { grid-template-columns: 1fr; }
+            .ann-search { margin-left: 0; width: 100%; }
+        }
+        @media (max-width: 768px) {
+            .ad-slide { padding: 0 18px; } .ad-slide h3 { font-size: 17px; } .ad-slide p { display: none; }
+            .ad-rotator { height: 110px; }
+            .flash-label { padding: 0 10px; }
+        }
+
+        /* Paiement des annonces */
+        .pay-total { background: var(--orange-clair); border-radius: 10px; padding: 10px 14px; font-size: 14px; margin-bottom: 6px; }
+        .pay-total b { color: var(--orange-accent); font-size: 17px; }
+        .pay-modes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+        .pay-modes label { cursor: pointer; }
+        .pay-modes input { position: absolute; opacity: 0; pointer-events: none; }
+        .pay-modes span { display: block; text-align: center; padding: 10px 6px; border: 2px solid rgba(21,101,192,.25); border-radius: 10px; font-size: 13px; font-weight: 600; transition: var(--transition); }
+        .pay-modes input:checked + span { background: linear-gradient(135deg, var(--bleu-principal), var(--violet-ia)); color: #fff; border-color: transparent; }
+        .pay-modes input:focus-visible + span { outline: 3px solid var(--orange-accent); }
+        .pay-info { background: #F5F9FF; border: 2px dashed rgba(21,101,192,.35); border-radius: 12px; padding: 14px; margin-bottom: 14px; font-size: 13px; line-height: 1.6; }
+        .pay-num { display: flex; align-items: center; justify-content: space-between; gap: 8px; background: #fff; border-radius: 8px; padding: 8px 12px; margin: 6px 0; font-weight: 700; font-size: 15px; }
+        .pay-num button { border: none; background: var(--bleu-clair); color: var(--bleu-principal); border-radius: 6px; padding: 5px 10px; font-weight: 700; font-size: 12px; cursor: pointer; }
+        .pay-qr { display: block; max-width: 170px; margin: 10px auto; border-radius: 10px; border: 1px solid #ddd; }
+        .pay-link { display: block; text-align: center; background: var(--vert-succes); color: #fff; text-decoration: none; padding: 10px; border-radius: 8px; font-weight: 700; margin-top: 8px; }
+        .ann-badge { display: inline-block; background: #FFF8E1; color: #E65100; border: 1px solid #FFB300; border-radius: 12px; padding: 3px 10px; font-size: 11px; font-weight: 700; margin-bottom: 6px; }
+        .ann-pin { color: var(--orange-accent); font-weight: 800; font-size: 11px; margin-left: 6px; }
+        .ext-mail { display: block; text-align: center; margin-top: 10px; font-weight: 700; font-size: 13px; color: var(--bleu-principal); }
+
+        /* ============ SERVICES PAYANTS, MÉDIAS, ESPACE SÉCURISÉ ============ */
+        .srv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 22px; margin-bottom: 40px; }
+        .srv-card { background: #fff; border-radius: 16px; padding: 26px; box-shadow: 0 6px 22px rgba(21,101,192,.1); border-top: 5px solid var(--bleu-principal); transition: var(--transition); display: flex; flex-direction: column; }
+        .srv-card:nth-child(3n+2) { border-color: var(--orange-accent); }
+        .srv-card:nth-child(3n) { border-color: var(--violet-ia); }
+        .srv-card:hover { transform: translateY(-7px); box-shadow: 0 16px 36px rgba(106,27,154,.18); }
+        .srv-ico { font-size: 36px; margin-bottom: 10px; }
+        .srv-card h3 { font-size: 18px; margin-bottom: 8px; }
+        .srv-card p { font-size: 13.5px; color: #666; flex: 1; margin-bottom: 14px; }
+        .srv-price { font-size: 13px; font-weight: 700; color: var(--bleu-principal); margin-bottom: 12px; }
+        .srv-card button { background: linear-gradient(135deg, var(--bleu-principal), var(--violet-ia)); color: #fff; border: none; border-radius: 8px; padding: 11px; font-weight: 700; cursor: pointer; }
+        .srv-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
+        .media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 22px; }
+        .media-card { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,.08); }
+        .media-card img, .media-card video, .media-card iframe { width: 100%; display: block; border: 0; background: #000; max-height: 260px; object-fit: cover; }
+        .media-card iframe { height: 260px; background: #fff; }
+        .media-body { padding: 16px; }
+        .media-body h4 { font-size: 16px; margin-bottom: 4px; }
+        .media-body p { font-size: 13px; color: #666; margin-bottom: 10px; }
+        .media-doc { height: 120px; display: flex; align-items: center; justify-content: center; font-size: 54px; background: linear-gradient(135deg, var(--bleu-clair), #F3E5F5); }
+        .media-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+        .media-actions a, .media-actions button { font-size: 12.5px; font-weight: 700; padding: 7px 14px; border-radius: 18px; border: 2px solid var(--bleu-principal); color: var(--bleu-principal); background: #fff; text-decoration: none; cursor: pointer; }
+        .ad-slide.img { padding: 0; }
+        .ad-slide.img a, .ad-slide.img > div { display: block; width: 100%; height: 100%; background: none; padding: 0; border-radius: 0; }
+        .ad-slide.img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        .adm-overlay { position: fixed; inset: 0; z-index: 3000; background: rgba(20,28,40,.78); display: flex; align-items: flex-start; justify-content: center; overflow-y: auto; padding: 30px 14px; }
+        .adm-box { background: #fff; border-radius: 18px; width: 100%; max-width: 1000px; box-shadow: 0 25px 70px rgba(0,0,0,.4); overflow: hidden; }
+        .adm-head { background: linear-gradient(135deg, var(--gris-texte), var(--bleu-principal)); color: #fff; padding: 16px 22px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .adm-head b { font-size: 17px; } .adm-head small { display: block; opacity: .8; font-size: 12px; }
+        .adm-head button { background: rgba(255,255,255,.18); color: #fff; border: none; border-radius: 8px; padding: 8px 14px; font-weight: 700; cursor: pointer; }
+        .adm-tabs { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 16px; background: var(--gris-clair); }
+        .adm-tabs button { border: none; background: #fff; border-radius: 8px; padding: 8px 14px; font-weight: 600; font-size: 13px; cursor: pointer; color: var(--gris-texte); }
+        .adm-tabs button.on { background: var(--bleu-principal); color: #fff; }
+        .adm-body { padding: 22px; }
+        .adm-body h3 { font-size: 18px; margin: 4px 0 14px; }
+        .adm-body h4 { margin: 20px 0 10px; font-size: 15px; }
+        .adm-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 10px; align-items: end; }
+        .adm-body input[type=text], .adm-body input[type=password], .adm-body input[type=number], .adm-body input[type=url], .adm-body select, .adm-body textarea { width: 100%; padding: 10px 12px; border: 2px solid rgba(21,101,192,.2); border-radius: 8px; font-family: inherit; font-size: 13.5px; }
+        .adm-body label { font-size: 12.5px; font-weight: 600; display: block; margin-bottom: 4px; }
+        .adm-btn { background: linear-gradient(135deg, var(--bleu-principal), var(--violet-ia)); color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-weight: 700; cursor: pointer; }
+        .adm-btn.alt { background: #fff; color: var(--bleu-principal); border: 2px solid var(--bleu-principal); }
+        .adm-btn.del { background: #C62828; }
+        .adm-item { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid #e3e8ef; border-radius: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+        .adm-item .grow { flex: 1; min-width: 160px; } .adm-item small { color: #777; display: block; }
+        .adm-thumb { width: 64px; height: 48px; object-fit: cover; border-radius: 6px; background: #eee; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        .adm-msg { margin: 8px 0; font-weight: 600; font-size: 13px; } .adm-msg.ok { color: var(--vert-succes); } .adm-msg.err { color: #C62828; }
+        .adm-note { background: #FFF8E1; border-left: 4px solid #FFB300; padding: 10px 14px; border-radius: 6px; font-size: 12.5px; line-height: 1.6; margin: 12px 0; }
+        .adm-perms { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0 12px; font-size: 13px; }
+        .adm-perms label { display: flex; align-items: center; gap: 6px; font-weight: 500; margin: 0; }
+        .adm-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 14px; }
+        .adm-stat { background: var(--bleu-clair); border-radius: 12px; padding: 14px; text-align: center; } .adm-stat b { display: block; font-size: 26px; color: var(--bleu-principal); }
+        .adm-login { max-width: 400px; margin: 0 auto; padding: 30px 22px; }
+        .adm-login .adm-row { grid-template-columns: 1fr; }
+        @media (max-width: 900px) { .srv-wrap { grid-template-columns: 1fr; } }
+        @media (max-width: 1180px) { nav ul { gap: 14px; } nav a { font-size: 12.5px; } .cta-button { display: none; } }
     </style>
 </head>
 <body>
@@ -932,7 +1127,10 @@
                     <li><a href="#accueil" class="nav-link active" data-section="accueil">Accueil</a></li>
                     <li><a href="#services" class="nav-link" data-section="services">Services</a></li>
                     <li><a href="#solutions" class="nav-link" data-section="solutions">Solutions</a></li>
+                    <li><a href="#commander" class="nav-link" data-section="commander">Commander</a></li>
                     <li><a href="#realisations" class="nav-link" data-section="realisations">Réalisations</a></li>
+                    <li><a href="#annonces" class="nav-link" data-section="annonces">Annonces</a></li>
+                    <li><a href="#publicite" class="nav-link" data-section="publicite">Publicité</a></li>
                     <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
                 </ul>
             </nav>
@@ -946,6 +1144,9 @@
             <a href="#contact" class="cta-button">Commencer</a>
         </div>
     </header>
+
+    <!-- ============ FLASH INFO ============ -->
+    <div class="flash-bar" id="flashBar"><div class="flash-label"><span class="live-dot"></span>FLASH INFO</div><div class="flash-track"><div class="flash-move" id="flashMove"></div></div></div>
 
     <!-- ============ HERO SECTION ============ -->
     <section class="hero" id="accueil">
@@ -1220,6 +1421,169 @@
                     <a href="https://diomande-system.github.io/MISSION_visite_CDP/" class="realisation-link" target="_blank">Voir le projet →</a>
                 </div>
             </div>
+
+            <div class="realisation-item fade-in" style="animation-delay: 0.9s">
+                <div class="realisation-thumb">🏦</div>
+                <div class="realisation-info">
+                    <div class="realisation-category">Gestion Scolaire</div>
+                    <div class="realisation-title">Gestion École Privée</div>
+                    <div class="realisation-desc">Application de gestion des établissements scolaires privés : élèves, scolarité, paiements et suivi administratif.</div>
+                    <a href="https://diomande-system.github.io/pj-gestionecoleprivee/" class="realisation-link" target="_blank">Voir le projet →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ SECTION COMMANDER UN SERVICE ============ -->
+    <section class="commander" id="commander">
+        <h2 class="section-title">Commander un service</h2>
+        <p class="ext-sub">Maintenance, formation, sites web, applications, projets, formulaires en ligne : choisissez un service, décrivez votre besoin et réglez l'acompte par Wave, Orange Money ou transfert. Le tarif total est fixé sur devis après étude.</p>
+
+        <div class="srv-grid" id="srvGrid"></div>
+
+        <div class="srv-wrap">
+            <form class="ext-panel" id="srvForm">
+                <h3>🛒 Ma demande de service</h3>
+                <div class="form-group"><label for="srvNom">Nom complet / Organisation</label><input type="text" id="srvNom" maxlength="80" required></div>
+                <div class="form-group"><label for="srvContact">Téléphone ou e-mail</label><input type="text" id="srvContact" maxlength="60" required></div>
+                <div class="form-group"><label for="srvSelect">Service souhaité</label><select id="srvSelect"></select></div>
+                <div class="form-group"><label for="srvDetails">Décrivez votre besoin</label><textarea id="srvDetails" maxlength="600" required></textarea></div>
+                <div class="form-group"><label for="srvDelai">Délai souhaité (facultatif)</label><input type="text" id="srvDelai" maxlength="40"></div>
+                <div class="pay-total">Acompte à payer : <b id="srvTotal">—</b></div>
+                <h3 style="font-size:16px;margin:18px 0 10px">💳 Paiement de l'acompte</h3>
+                <div id="srvPay"></div>
+                <button type="submit" class="btn-submit" style="width:100%">Envoyer ma demande et ma preuve de paiement</button>
+                <div class="ext-ok" id="srvOk"></div>
+                <a class="ext-mail" id="srvMail" href="#" target="_blank" rel="noopener" style="display:none">✉️ Envoyer aussi par e-mail</a>
+                <p class="ext-note">🔒 L'équipe EPLUS vérifie votre paiement, puis vous contacte pour lancer le projet. Ne communiquez jamais votre code secret : EPLUS ne demande aucun numéro de carte sur ce site.</p>
+            </form>
+            <div>
+                <h3 style="font-size:20px;margin-bottom:12px">Mes demandes sur cet appareil</h3>
+                <div id="srvMine"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ SECTION MÉDIAS ============ -->
+    <section class="medias" id="medias" hidden>
+        <h2 class="section-title">Médias &amp; présentations</h2>
+        <p class="ext-sub">Images, vidéos et présentations d'EPLUS TECHNOLOGIE et de ses partenaires.</p>
+        <div class="media-grid" id="mediaGrid"></div>
+    </section>
+
+    <!-- ============ SECTION ANNONCES ============ -->
+    <section class="annonces" id="annonces">
+        <h2 class="section-title">Annonces</h2>
+        <p class="ext-sub">Emplois, formations, événements et offres : consultez les annonces ou demandez la publication de la vôtre (service payant, paiement par Wave, Orange Money ou transfert).</p>
+
+        <div class="ad-rotator" id="adRotator" aria-label="Bannière publicitaire"></div>
+
+        <div class="ann-toolbar" id="annFilters">
+            <button class="chip on" data-cat="Toutes">Toutes</button>
+            <button class="chip" data-cat="Emploi">Emploi</button>
+            <button class="chip" data-cat="Formation">Formation</button>
+            <button class="chip" data-cat="Événement">Événement</button>
+            <button class="chip" data-cat="Offre">Offre</button>
+            <button class="chip" data-cat="Avis">Avis</button>
+            <input type="search" class="ann-search" id="annSearch" placeholder="🔎 Rechercher une annonce…">
+        </div>
+
+        <div class="ann-layout">
+            <div class="ann-list" id="annList"></div>
+
+            <form class="ext-panel" id="annForm">
+                <h3>📣 Demander une annonce <span style="color:var(--orange-accent)">(payant)</span></h3>
+
+                <div class="form-group"><label for="annTitre">Titre</label><input type="text" id="annTitre" maxlength="80" required></div>
+                <div class="form-group"><label for="annCat">Catégorie</label>
+                    <select id="annCat"><option>Emploi</option><option>Formation</option><option>Événement</option><option>Offre</option><option>Avis</option></select>
+                </div>
+                <div class="form-group"><label for="annTexte">Message</label><textarea id="annTexte" maxlength="400" required></textarea></div>
+                <div class="form-group"><label for="annContact">Votre contact (téléphone ou e-mail)</label><input type="text" id="annContact" maxlength="60" required></div>
+                <div class="form-group"><label for="annFormule">Formule</label><select id="annFormule"></select></div>
+                <div class="pay-total">Total à payer : <b id="annTotal">—</b></div>
+
+                <h3 style="font-size:16px;margin:18px 0 10px">💳 Mode de paiement</h3>
+                <div class="pay-modes" id="payModes">
+                    <label><input type="radio" name="payMode" value="Wave" checked><span>🌊 Wave</span></label>
+                    <label><input type="radio" name="payMode" value="Orange Money"><span>🟠 Orange Money</span></label>
+                    <label><input type="radio" name="payMode" value="Carte Visa"><span>💳 Carte Visa</span></label>
+                    <label><input type="radio" name="payMode" value="Transfert d'argent"><span>💸 Transfert</span></label>
+                </div>
+                <div class="pay-info" id="payInfo"></div>
+
+                <div class="form-group"><label for="annPayeur">Numéro ou nom utilisé pour payer</label><input type="text" id="annPayeur" maxlength="60" required></div>
+                <div class="form-group"><label for="annRef">Référence de la transaction (reçue par SMS)</label><input type="text" id="annRef" maxlength="60" required></div>
+
+                <button type="submit" class="btn-submit" style="width:100%">Envoyer ma demande et ma preuve de paiement</button>
+                <div class="ext-ok" id="annOk"></div>
+                <a class="ext-mail" id="annMail" href="#" target="_blank" rel="noopener" style="display:none">✉️ Envoyer aussi par e-mail</a>
+                <p class="ext-note">🔒 Votre annonce est publiée après vérification du paiement par l'équipe EPLUS. Ne communiquez jamais votre code secret : EPLUS ne demande aucun numéro de carte sur ce site.</p>
+            </form>
+        </div>
+    </section>
+
+    <!-- ============ SECTION PUBLICITÉ ============ -->
+    <section class="pub-section" id="publicite">
+        <div class="pub-inner">
+            <h2 class="section-title">Espace Annonceurs</h2>
+            <p class="ext-sub">Faites connaître votre entreprise, votre école ou votre événement auprès des utilisateurs des plateformes EPLUS.</p>
+
+            <div class="pub-formats">
+                <div class="pub-card">
+                    <div class="pub-ico">🖼️</div>
+                    <h3>Bannière</h3>
+                    <p>Visible en haut de la page Annonces.</p>
+                    <ul><li>Format horizontal</li><li>Rotation avec d'autres annonceurs</li><li>Lien vers votre site</li></ul>
+                    <div class="pub-price">Tarif sur demande</div>
+                </div>
+                <div class="pub-card star">
+                    <div class="pub-ico">⚡</div>
+                    <h3>Flash Info</h3>
+                    <p>Votre message dans le bandeau défilant.</p>
+                    <ul><li>Visible sur toute la page</li><li>Message court et percutant</li><li>Durée au choix</li></ul>
+                    <div class="pub-price">Tarif sur demande</div>
+                </div>
+                <div class="pub-card">
+                    <div class="pub-ico">📌</div>
+                    <h3>Annonce mise en avant</h3>
+                    <p>Épinglée dans la liste des annonces.</p>
+                    <ul><li>Catégorie au choix</li><li>Texte détaillé</li><li>Contact direct</li></ul>
+                    <div class="pub-price">Tarif sur demande</div>
+                </div>
+                <div class="pub-card">
+                    <div class="pub-ico">🤝</div>
+                    <h3>Partenariat</h3>
+                    <p>Une présence durable aux côtés d'EPLUS.</p>
+                    <ul><li>Logo et page dédiée</li><li>Campagne sur mesure</li><li>Accompagnement</li></ul>
+                    <div class="pub-price">Sur devis</div>
+                </div>
+            </div>
+
+            <div class="pub-layout">
+                <div>
+                    <h3 style="font-size:22px;margin-bottom:6px">Emplacements disponibles</h3>
+                    <p class="ext-note" style="margin:0 0 16px">Aperçu des emplacements publicitaires.</p>
+                    <div class="pub-slots">
+                        <div class="pub-slot lead"><div>Bannière horizontale<small>Votre publicité ici</small></div></div>
+                        <div class="pub-slot rect"><div>Grand encart<small>Votre publicité ici</small></div></div>
+                        <div class="pub-slot sky"><div>Bandeau Flash Info<small>Votre message ici</small></div></div>
+                    </div>
+                </div>
+
+                <form class="ext-panel" id="pubForm">
+                    <h3>📨 Demander une campagne</h3>
+                    <div class="form-group"><label for="pubNom">Entreprise / Organisation</label><input type="text" id="pubNom" required></div>
+                    <div class="form-group"><label for="pubTel">Téléphone / WhatsApp</label><input type="text" id="pubTel" required></div>
+                    <div class="form-group"><label for="pubFormat">Format souhaité</label>
+                        <select id="pubFormat"><option>Bannière</option><option>Flash Info</option><option>Annonce mise en avant</option><option>Partenariat</option></select>
+                    </div>
+                    <div class="form-group"><label for="pubMsg">Votre message publicitaire</label><textarea id="pubMsg" required></textarea></div>
+                    <button type="submit" class="btn-submit" style="width:100%">Envoyer via WhatsApp</button>
+                    <div class="ext-ok" id="pubOk"></div>
+                    <p class="ext-note">Votre demande s'ouvre dans WhatsApp, prête à être envoyée à l'équipe EPLUS.</p>
+                </form>
+            </div>
         </div>
     </section>
 
@@ -1302,6 +1666,8 @@
                     <li><a href="#services">Services</a></li>
                     <li><a href="#solutions">Solutions</a></li>
                     <li><a href="#realisations">Réalisations</a></li>
+                    <li><a href="#annonces">Annonces</a></li>
+                    <li><a href="#publicite">Publicité</a></li>
                 </ul>
             </div>
 
@@ -1332,6 +1698,7 @@
                     <li><a href="#">Politique de confidentialité</a></li>
                     <li><a href="#">Conditions d'utilisation</a></li>
                     <li><a href="#">Nous rejoindre</a></li>
+                    <li><a href="#admin" id="admLink">🔐 Espace sécurisé</a></li>
                 </ul>
             </div>
         </div>
@@ -1443,6 +1810,810 @@
                 }
             });
         });
+    </script>
+    <!-- ============ ASSISTANT IA ============ -->
+    <button class="ai-fab" id="aiFab" title="Assistant EPLUS IA" aria-label="Ouvrir l'assistant EPLUS IA">🤖</button>
+    <div class="ai-panel" id="aiPanel" role="dialog" aria-label="Assistant EPLUS IA">
+        <div class="ai-head"><div><b>🤖 Assistant EPLUS IA</b><small>Posez-moi vos questions</small></div><button id="aiClose" aria-label="Fermer">×</button></div>
+        <div class="ai-body" id="aiBody"></div>
+        <div class="ai-quick" id="aiQuick"></div>
+        <form class="ai-form" id="aiForm"><input type="text" id="aiInput" placeholder="Écrivez votre question…" autocomplete="off"><button type="submit">Envoyer</button></form>
+    </div>
+
+    <script>
+    (function () {
+        'use strict';
+        var WA = '2250749237462';
+        function $(id) { return document.getElementById(id); }
+        function norm(s) { return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+        function lsGet(k) { try { return JSON.parse(localStorage.getItem(k) || '[]'); } catch (e) { return []; } }
+        function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+
+        /* ---------- Annonces payantes ---------- */
+        var CONFIG = {
+            EMAIL: 'diomyaya28@gmail.com',
+            NUMEROS: ['07 49 23 74 62', '01 40 99 58 77'],
+            /* TARIFS À MODIFIER (en FCFA) */
+            PRIX: [
+                { id: 'std', nom: 'Annonce standard', prix: 2000, duree: '7 jours' },
+                { id: 'pin', nom: 'Annonce mise en avant', prix: 5000, duree: '7 jours' },
+                { id: 'flash', nom: 'Flash Info (bandeau défilant)', prix: 3000, duree: '3 jours' }
+            ],
+            /* Images de vos QR codes de paiement (ex. 'qr-wave.png'). Laisser vide = non affiché. */
+            QR: { wave: '', orange: '' },
+            /* Liens de paiement (Wave, Orange Money, prestataire de carte Visa). Laisser vide = non affiché. */
+            LIEN: { wave: '', orange: '', carte: '' }
+        };
+        /* Annonces validées après paiement : ajoutez-les ici. Exemple :
+           { id: 'v1', titre: 'Titre', cat: 'Emploi', texte: 'Message', contact: '07…', date: '2026-11-16', flash: false, pin: false } */
+        var ANNONCES_VALIDEES = [];
+
+        var SEEDS = [
+            { id: 's1', titre: 'Bienvenue sur l\'espace Annonces', cat: 'Avis', texte: 'Publiez vos offres d\'emploi, formations et événements. Exemple d\'annonce.', contact: 'EPLUS TECHNOLOGIE', date: '2026-11-16', seed: true },
+            { id: 's2', titre: 'Formations en informatique', cat: 'Formation', texte: 'EPLUS propose des formations en informatique, développement web et transformation numérique. Contactez-nous pour le programme.', contact: '+225 07 49 23 74 62', date: '2026-11-15', seed: true },
+            { id: 's3', titre: 'Digitalisez votre établissement', cat: 'Offre', texte: 'Solutions de gestion scolaire, GED et RH pour votre structure. Demandez une démonstration.', contact: 'diomyaya28@gmail.com', date: '2026-11-14', seed: true }
+        ];
+        var KEY = 'eplus_annonces_demandes', catSel = 'Toutes', query = '';
+        function fcfa(n) { return Number(n).toLocaleString('fr-FR') + ' FCFA'; }
+        function formule(id) { return CONFIG.PRIX.filter(function (p) { return p.id === id; })[0] || CONFIG.PRIX[0]; }
+        function publicAnn() {
+            return ANNONCES_VALIDEES.concat(SEEDS).sort(function (a, b) {
+                if (!!b.pin !== !!a.pin) return b.pin ? 1 : -1;
+                return b.date < a.date ? -1 : b.date > a.date ? 1 : 0;
+            });
+        }
+        function renderAnn() {
+            var box = $('annList'); box.textContent = '';
+            var mine = lsGet(KEY).map(function (a) { a.pending = true; return a; });
+            var items = mine.concat(publicAnn()).filter(function (a) {
+                return (catSel === 'Toutes' || a.cat === catSel) && (!query || norm(a.titre + ' ' + a.texte).indexOf(query) > -1);
+            });
+            if (!items.length) { var e = document.createElement('div'); e.className = 'ann-empty'; e.textContent = 'Aucune annonce pour le moment.'; box.appendChild(e); }
+            items.forEach(function (a) {
+                var c = document.createElement('article'); c.className = 'ann-card'; c.setAttribute('data-cat', a.cat);
+                if (a.pending) { var bd = document.createElement('div'); bd.className = 'ann-badge'; bd.textContent = '⏳ En attente de validation du paiement'; c.appendChild(bd); }
+                var cat = document.createElement('div'); cat.className = 'ann-cat'; cat.textContent = a.cat;
+                if (a.pin) { var pn = document.createElement('span'); pn.className = 'ann-pin'; pn.textContent = '★ À LA UNE'; cat.appendChild(pn); }
+                var h = document.createElement('h4'); h.textContent = a.titre;
+                var p = document.createElement('p'); p.textContent = a.texte;
+                var m = document.createElement('div'); m.className = 'ann-meta';
+                var s = document.createElement('span'); s.textContent = a.date + (a.contact ? ' · ' + a.contact : '');
+                m.appendChild(s);
+                if (a.pending) {
+                    var d = document.createElement('button'); d.className = 'ann-del'; d.type = 'button'; d.textContent = 'Annuler';
+                    d.onclick = function () { lsSet(KEY, lsGet(KEY).filter(function (x) { return x.id !== a.id; })); renderAnn(); };
+                    m.appendChild(d);
+                }
+                c.appendChild(cat); c.appendChild(h); c.appendChild(p); c.appendChild(m); box.appendChild(c);
+            });
+        }
+        $('annFilters').addEventListener('click', function (e) {
+            var b = e.target.closest('.chip'); if (!b) return;
+            catSel = b.getAttribute('data-cat');
+            Array.prototype.forEach.call(document.querySelectorAll('#annFilters .chip'), function (x) { x.classList.toggle('on', x === b); });
+            renderAnn();
+        });
+        $('annSearch').addEventListener('input', function (e) { query = norm(e.target.value.trim()); renderAnn(); });
+
+        /* Formules et total */
+        function fillFormules() {
+            var sel = $('annFormule'), keep = sel.value; sel.textContent = '';
+            CONFIG.PRIX.forEach(function (p) {
+                var o = document.createElement('option'); o.value = p.id; o.textContent = p.nom + ' — ' + fcfa(p.prix) + (p.duree ? ' (' + p.duree + ')' : '');
+                sel.appendChild(o);
+            });
+            if (keep) sel.value = keep;
+            if (!sel.value && sel.options.length) sel.selectedIndex = 0;
+        }
+        fillFormules();
+        function updTotal() { $('annTotal').textContent = fcfa(formule($('annFormule').value).prix); showPay(); }
+
+        /* Informations de paiement */
+        function payMode() { var r = document.querySelector('input[name="payMode"]:checked'); return r ? r.value : 'Wave'; }
+        function renderPayInfo(box, mode, total) {
+            box.textContent = '';
+            function line(t) { var d = document.createElement('div'); d.textContent = t; box.appendChild(d); }
+            if (mode === 'Carte Visa') {
+                if (CONFIG.LIEN.carte) {
+                    line('Payez ' + total + ' par carte Visa sur la page sécurisée de notre prestataire, puis saisissez ci-dessous la référence reçue.');
+                    var a = document.createElement('a'); a.className = 'pay-link'; a.href = CONFIG.LIEN.carte; a.target = '_blank'; a.rel = 'noopener'; a.textContent = '🔒 Payer par carte Visa'; box.appendChild(a);
+                } else {
+                    line('Le paiement par carte Visa sera disponible via un prestataire sécurisé. Pour le moment, choisissez Wave, Orange Money ou Transfert d\'argent.');
+                }
+                return;
+            }
+            line('Envoyez ' + total + ' par ' + mode + ' à l\'un de ces numéros :');
+            CONFIG.NUMEROS.forEach(function (n) {
+                var r = document.createElement('div'); r.className = 'pay-num';
+                var s = document.createElement('span'); s.textContent = n;
+                var b = document.createElement('button'); b.type = 'button'; b.textContent = 'Copier';
+                b.onclick = function () {
+                    try { navigator.clipboard.writeText(n.replace(/\s/g, '')); b.textContent = 'Copié ✓'; setTimeout(function () { b.textContent = 'Copier'; }, 1800); } catch (e) {}
+                };
+                r.appendChild(s); r.appendChild(b); box.appendChild(r);
+            });
+            var qr = mode === 'Wave' ? CONFIG.QR.wave : mode === 'Orange Money' ? CONFIG.QR.orange : '';
+            if (qr) { line('Ou scannez ce QR code avec votre application :'); var im = document.createElement('img'); im.className = 'pay-qr'; im.src = qr; im.alt = 'QR code ' + mode; box.appendChild(im); }
+            var lk = mode === 'Wave' ? CONFIG.LIEN.wave : mode === 'Orange Money' ? CONFIG.LIEN.orange : '';
+            if (lk) { var a2 = document.createElement('a'); a2.className = 'pay-link'; a2.href = lk; a2.target = '_blank'; a2.rel = 'noopener'; a2.textContent = '🔒 Payer avec ' + mode; box.appendChild(a2); }
+            line('Après le paiement, recopiez la référence reçue par SMS dans le champ ci-dessous.');
+        }
+        function showPay() { renderPayInfo($('payInfo'), payMode(), fcfa(formule($('annFormule').value).prix)); }
+        /* Bloc de paiement réutilisable (formulaire de services) */
+        function mountPay(box, name, getTotal) {
+            box.textContent = '';
+            var modes = document.createElement('div'); modes.className = 'pay-modes';
+            [['Wave', '🌊 Wave'], ['Orange Money', '🟠 Orange Money'], ['Carte Visa', '💳 Carte Visa'], ['Transfert d\'argent', '💸 Transfert']].forEach(function (m, i) {
+                var l = document.createElement('label'), r = document.createElement('input'), s = document.createElement('span');
+                r.type = 'radio'; r.name = name; r.value = m[0]; if (i === 0) r.checked = true; s.textContent = m[1];
+                l.appendChild(r); l.appendChild(s); modes.appendChild(l);
+            });
+            var info = document.createElement('div'); info.className = 'pay-info';
+            function field(label, id) {
+                var g = document.createElement('div'); g.className = 'form-group';
+                var lb = document.createElement('label'); lb.htmlFor = id; lb.textContent = label;
+                var inp = document.createElement('input'); inp.type = 'text'; inp.id = id; inp.maxLength = 60; inp.required = true;
+                g.appendChild(lb); g.appendChild(inp); return { g: g, i: inp };
+            }
+            var payeur = field('Numéro ou nom utilisé pour payer', name + 'Payeur'), ref = field('Référence de la transaction (reçue par SMS)', name + 'Ref');
+            box.appendChild(modes); box.appendChild(info); box.appendChild(payeur.g); box.appendChild(ref.g);
+            function mode() { var r = box.querySelector('input[name="' + name + '"]:checked'); return r ? r.value : 'Wave'; }
+            function update() { renderPayInfo(info, mode(), fcfa(getTotal())); }
+            modes.addEventListener('change', update); update();
+            return { mode: mode, payeur: payeur.i, ref: ref.i, update: update };
+        }
+        
+$('annFormule').addEventListener('change', updTotal);
+        $('payModes').addEventListener('change', showPay);
+        updTotal();
+
+        $('annForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            var f = formule($('annFormule').value);
+            var d = {
+                id: 'u' + Date.now(), titre: $('annTitre').value.trim(), cat: $('annCat').value, texte: $('annTexte').value.trim(),
+                contact: $('annContact').value.trim(), formule: f.nom, montant: f.prix, mode: payMode(),
+                payeur: $('annPayeur').value.trim(), ref: $('annRef').value.trim(), date: new Date().toISOString().slice(0, 10)
+            };
+            var list = lsGet(KEY); list.push(d); lsSet(KEY, list);
+            var txt = 'Bonjour EPLUS TECHNOLOGIE, je demande la publication d\'une annonce payante.\n' +
+                'Titre : ' + d.titre + '\nCatégorie : ' + d.cat + '\nMessage : ' + d.texte + '\nContact : ' + d.contact + '\n' +
+                'Formule : ' + d.formule + ' (' + fcfa(d.montant) + ')\nPaiement : ' + d.mode + '\nPayé depuis : ' + d.payeur + '\nRéférence transaction : ' + d.ref;
+            window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(txt), '_blank', 'noopener');
+            var mail = $('annMail');
+            mail.href = 'mailto:' + CONFIG.EMAIL + '?subject=' + encodeURIComponent('Demande d\'annonce payante : ' + d.titre) + '&body=' + encodeURIComponent(txt);
+            mail.style.display = 'block';
+            e.target.reset(); updTotal(); renderAnn();
+            $('annOk').textContent = '✅ Demande enregistrée. Envoyez-la dans WhatsApp : votre annonce sera publiée après vérification du paiement.';
+        });
+
+        /* ---------- Flash info ---------- */
+        var FLASH = [
+            '🚀 EPLUS TECHNOLOGIE, la technologie du futur',
+            '🎓 Découvrez nos solutions : LE PERROQUET PGNEP, EPLUS GES-ÉCOLES, EPLUS Learning',
+            '📣 Annonces payantes : paiement par Wave ou Orange Money',
+            '📢 Annonceurs : réservez votre emplacement publicitaire',
+            '🤖 Posez vos questions à l\'Assistant EPLUS IA'
+        ];
+        var FLASH_EXTRA = [];
+        function buildFlash() {
+            var extra = ANNONCES_VALIDEES.filter(function (a) { return a.flash; }).map(function (a) { return '⚡ ' + a.titre + ' — ' + a.texte.slice(0, 90); });
+            var base = FLASH_EXTRA.length ? FLASH_EXTRA.map(function (t) { return '📢 ' + t; }) : FLASH;
+            var items = extra.concat(base), mv = $('flashMove'); mv.textContent = '';
+            for (var r = 0; r < 2; r++) items.forEach(function (t) { var s = document.createElement('span'); s.textContent = t; mv.appendChild(s); });
+        }
+
+        
+/* ---------- Bannière publicitaire rotative ---------- */
+        var DEFAULT_PROMOS = [
+            { tag: 'À LA UNE', t: 'LE PERROQUET PGNEP', p: 'Remontée et suivi des notes des élèves, en temps réel.', href: 'https://diomande-system.github.io/le-perroquet_pgnep_remonte_notes_eleves/', bg: 'linear-gradient(135deg,#1565C0,#6A1B9A)', cta: 'Découvrir' },
+            { tag: 'PARTENAIRES', t: 'Votre publicité ici', p: 'Touchez les utilisateurs des plateformes EPLUS.', href: '#publicite', bg: 'linear-gradient(135deg,#F57C00,#BF360C)', cta: 'Devenir annonceur' },
+            { tag: 'À LA UNE', t: 'EPLUS GES-ÉCOLES', p: 'Gestion intégrée de vos établissements scolaires.', href: '#solutions', bg: 'linear-gradient(135deg,#2E7D32,#1565C0)', cta: 'Voir les solutions' }
+        ];
+        var rotTimer = null;
+        function buildRotator(promos) {
+            var box = $('adRotator'), dots = document.createElement('div'), idx = 0;
+            clearInterval(rotTimer); box.textContent = ''; dots.className = 'ad-dots';
+            var list = promos.length ? promos : DEFAULT_PROMOS;
+            list.forEach(function (pr, i) {
+                var s = document.createElement('div'); s.className = 'ad-slide' + (i === 0 ? ' on' : '');
+                if (pr.img) {
+                    s.className += ' img';
+                    var im = document.createElement('img'); im.alt = pr.alt || 'Publicité';
+                    var holder = pr.href ? document.createElement('a') : document.createElement('div');
+                    if (pr.href) { holder.href = pr.href; if (pr.href.indexOf('http') === 0) { holder.target = '_blank'; holder.rel = 'noopener'; } }
+                    holder.appendChild(im); s.appendChild(holder);
+                    if (pr.local) { blobURL(pr.id).then(function (u) { im.src = u || pr.img; }); } else { im.src = pr.img; }
+                } else {
+                    s.style.background = pr.bg;
+                    var l = document.createElement('div');
+                    var tg = document.createElement('span'); tg.className = 'ad-tag'; tg.textContent = pr.tag;
+                    var h = document.createElement('h3'); h.textContent = pr.t;
+                    var p = document.createElement('p'); p.textContent = pr.p;
+                    l.appendChild(tg); l.appendChild(h); l.appendChild(p);
+                    var a = document.createElement('a'); a.href = pr.href; a.textContent = pr.cta + ' →';
+                    if (pr.href.indexOf('http') === 0) { a.target = '_blank'; a.rel = 'noopener'; }
+                    s.appendChild(l); s.appendChild(a);
+                }
+                box.appendChild(s);
+                var d = document.createElement('i'); if (i === 0) d.className = 'on';
+                d.onclick = function () { go(i); start(); }; dots.appendChild(d);
+            });
+            box.appendChild(dots);
+            function go(n) {
+                idx = n;
+                Array.prototype.forEach.call(box.querySelectorAll('.ad-slide'), function (x, i) { x.classList.toggle('on', i === n); });
+                Array.prototype.forEach.call(dots.children, function (x, i) { x.classList.toggle('on', i === n); });
+            }
+            function start() { clearInterval(rotTimer); if (list.length > 1) rotTimer = setInterval(function () { go((idx + 1) % list.length); }, 5000); }
+            start();
+        }
+
+        /* ---------- Formulaire annonceur → WhatsApp ---------- */
+/* ---------- Formulaire annonceur → WhatsApp ---------- */
+        $('pubForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            var d = { nom: $('pubNom').value.trim(), tel: $('pubTel').value.trim(), format: $('pubFormat').value, msg: $('pubMsg').value.trim(), date: new Date().toISOString() };
+            var l = lsGet('eplus_pub_demandes'); l.push(d); lsSet('eplus_pub_demandes', l);
+            var txt = 'Bonjour EPLUS TECHNOLOGIE, je souhaite une campagne publicitaire.\nEntreprise : ' + d.nom + '\nContact : ' + d.tel + '\nFormat : ' + d.format + '\nMessage : ' + d.msg;
+            window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(txt), '_blank', 'noopener');
+            $('pubOk').textContent = '✅ Votre demande est prête dans WhatsApp.';
+            e.target.reset();
+        });
+
+        /* ---------- Assistant IA ---------- */
+        var AI_ENDPOINT = ''; /* Optionnel : URL d'un serveur relié à un vrai modèle d'IA (POST {question} → {reponse}). */
+        var KB = [
+            { k: ['bonjour', 'salut', 'bonsoir', 'hello'], a: 'Bonjour ! Je suis l\'assistant EPLUS. Je peux vous renseigner sur nos services, nos solutions, la publicité, les annonces ou vos contacts.' },
+            { k: ['service', 'propose', 'offre', 'faites'], a: 'EPLUS propose : maintenance informatique, développement web et mobile, cybersécurité, hébergement cloud, formations, intelligence artificielle, digitalisation et support technique.\nVoir la section « Nos Services ».' },
+            { k: ['solution', 'logiciel', 'plateforme', 'application'], a: 'Nos solutions : LE PERROQUET PGNEP, EPLUS GES-ÉCOLES, EPLUS Maintenance, EPLUS Learning, EPLUS GED et EPLUS RH. Voir la section « Nos Solutions ».' },
+            { k: ['perroquet', 'pgnep', 'note', 'bulletin'], a: 'LE PERROQUET PGNEP est une plateforme de gestion pédagogique pour l\'école primaire (notes, bulletins, suivi des élèves). Elle est disponible dans « Nos Réalisations ».' },
+            { k: ['ecole', 'scolaire', 'etablissement', 'iepp', 'cdp'], a: 'Pour les établissements : EPLUS GES-ÉCOLES, la Plateforme IEPP, Gestion École Privée, et l\'outil de mission de visite CDP. Tout est dans « Nos Réalisations ».' },
+            { k: ['publicite', 'pub', 'annonceur', 'banniere', 'campagne', 'sponsor'], a: 'Pour faire de la publicité : bannière, Flash Info, annonce mise en avant ou partenariat. Remplissez le formulaire de l\'Espace Annonceurs : il s\'ouvre dans WhatsApp, prêt à envoyer.\nLes tarifs sont donnés sur demande.' },
+            { k: ['annonce', 'publier', 'emploi', 'offre d\'emploi', 'evenement', 'paiement', 'payer', 'wave', 'orange', 'visa', 'carte'], a: 'La publication d\'une annonce est payante. Dans la section « Annonces », remplissez le formulaire, choisissez une formule, payez par Wave, Orange Money ou transfert d\'argent aux numéros 07 49 23 74 62 / 01 40 99 58 77, puis saisissez la référence de la transaction. Votre annonce est publiée après vérification du paiement.' },
+            { k: ['flash', 'bandeau', 'info'], a: 'Le bandeau FLASH INFO défile en haut du site. Une annonce y est diffusée si vous cochez l\'option lors de sa publication.' },
+            { k: ['contact', 'telephone', 'tel', 'whatsapp', 'appeler', 'email', 'mail', 'adresse'], a: 'Contact EPLUS :\n📍 Abidjan, Koumassi 32, Rue Martin Luther King\n📧 diomyaya28@gmail.com\n📱 +225 01 40 99 58 77 / +225 07 49 23 74 62\nVoir aussi la section « Nous Contacter ».' },
+            { k: ['formation', 'apprendre', 'cours', 'learning'], a: 'EPLUS propose des formations en informatique, développement web, gestion de projets et transformation numérique, ainsi que la plateforme EPLUS Learning.' },
+            { k: ['prix', 'tarif', 'cout', 'combien', 'devis'], a: 'Les tarifs dépendent du besoin. Envoyez votre demande via le formulaire de contact ou WhatsApp pour recevoir un devis.' },
+            { k: ['merci'], a: 'Avec plaisir ! N\'hésitez pas si vous avez d\'autres questions.' }
+        ];
+        KB.splice(1, 0, { k: ['commander', 'maintenance', 'site web', 'application', 'projet', 'formulaire', 'remontee', 'acompte'], a: 'Dans la section « Commander un service », choisissez Maintenance, Formation, Conception de site, Conception d\'application, Création de projet ou Formulaire en ligne. Décrivez votre besoin, réglez l\'acompte par Wave, Orange Money ou transfert, puis envoyez la demande dans WhatsApp. Le tarif total est fixé sur devis.' });
+        var QUICK = ['Vos services', 'Faire de la publicité', 'Publier une annonce', 'Contact'];
+        var panel = $('aiPanel'), body = $('aiBody');
+        function say(text, who) { var m = document.createElement('div'); m.className = 'ai-msg ' + who; m.textContent = text; body.appendChild(m); body.scrollTop = body.scrollHeight; return m; }
+        function localAnswer(q) {
+            var n = norm(q), best = null, score = 0;
+            KB.forEach(function (e) { var s = 0; e.k.forEach(function (w) { if (n.indexOf(norm(w)) > -1) s++; }); if (s > score) { score = s; best = e; } });
+            return best ? best.a : 'Je n\'ai pas de réponse précise à cette question. Vous pouvez l\'envoyer à l\'équipe sur WhatsApp : https://wa.me/' + WA;
+        }
+        function ask(q) {
+            say(q, 'me');
+            if (!AI_ENDPOINT) { setTimeout(function () { say(localAnswer(q), 'bot'); }, 350); return; }
+            var wait = say('…', 'bot');
+            fetch(AI_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: q }) })
+                .then(function (r) { return r.json(); })
+                .then(function (j) { wait.textContent = j.reponse || localAnswer(q); })
+                .catch(function () { wait.textContent = localAnswer(q); });
+        }
+        QUICK.forEach(function (t) { var b = document.createElement('button'); b.type = 'button'; b.textContent = t; b.onclick = function () { ask(t); }; $('aiQuick').appendChild(b); });
+        $('aiFab').onclick = function () {
+            panel.classList.toggle('open');
+            if (panel.classList.contains('open') && !body.children.length) say('Bonjour ! Je suis l\'assistant EPLUS. Comment puis-je vous aider ?', 'bot');
+        };
+        $('aiClose').onclick = function () { panel.classList.remove('open'); };
+        $('aiForm').addEventListener('submit', function (e) {
+            e.preventDefault(); var v = $('aiInput').value.trim(); if (!v) return; $('aiInput').value = ''; ask(v);
+        });
+
+        /* ---------- Médias : stockage local des fichiers (aperçu sur l'appareil de l'administrateur) ---------- */
+        var IDB = (function () {
+            var dbp;
+            function open() {
+                if (!window.indexedDB) return Promise.reject(new Error('no idb'));
+                if (dbp) return dbp;
+                dbp = new Promise(function (res, rej) {
+                    var r = indexedDB.open('eplus_media', 1);
+                    r.onupgradeneeded = function () { r.result.createObjectStore('f'); };
+                    r.onsuccess = function () { res(r.result); }; r.onerror = function () { rej(r.error); };
+                });
+                return dbp;
+            }
+            function tx(mode, fn) {
+                return open().then(function (db) {
+                    return new Promise(function (res, rej) {
+                        var t = db.transaction('f', mode), rq = fn(t.objectStore('f'));
+                        t.oncomplete = function () { res(rq && rq.result); }; t.onerror = function () { rej(t.error); };
+                    });
+                });
+            }
+            return {
+                put: function (k, b) { return tx('readwrite', function (s) { return s.put(b, k); }); },
+                get: function (k) { return tx('readonly', function (s) { return s.get(k); }); },
+                del: function (k) { return tx('readwrite', function (s) { return s['delete'](k); }); }
+            };
+        })();
+        function blobURL(id) { return IDB.get(id).then(function (b) { return b ? URL.createObjectURL(b) : null; }).catch(function () { return null; }); }
+
+        /* ---------- Configuration (fichier eplus-config.json ou brouillon de l'administrateur) ---------- */
+        function clone(o) { return JSON.parse(JSON.stringify(o)); }
+        function str(v, n) { return String(v == null ? '' : v).slice(0, n || 500); }
+        function arr(v) { return Array.isArray(v) ? v : []; }
+        function num(v, d) { v = Number(v); return isFinite(v) && v >= 0 ? Math.round(v) : d; }
+        function safeUrl(u) {
+            u = String(u || '').trim();
+            if (!u) return '';
+            if (/^data:image\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+\/=]+$/.test(u)) return u;
+            if (/^https?:\/\/[^\s]+$/i.test(u)) return u;
+            if (/^[A-Za-z0-9_\-.\/#?=&%~@]+$/.test(u) && !/^[A-Za-z][A-Za-z0-9+.\-]*:/.test(u)) return u;
+            return '';
+        }
+        var DEFAULT_CFG = {
+            version: 1, annonces: [], flash: [], medias: [],
+            formules: clone(CONFIG.PRIX),
+            services: [
+                { id: 'maintenance', nom: 'Maintenance informatique', icone: '🛠️', desc: 'Dépannage, maintenance préventive et corrective de vos postes, réseaux et serveurs.', prix: 5000 },
+                { id: 'formation', nom: 'Formation', icone: '🎓', desc: 'Formations en informatique, bureautique, développement web et transformation numérique.', prix: 5000 },
+                { id: 'site', nom: 'Conception de site web', icone: '🌐', desc: 'Site vitrine, portail institutionnel ou plateforme web moderne et responsive.', prix: 5000 },
+                { id: 'app', nom: 'Conception d\'application', icone: '📱', desc: 'Applications web et mobiles sur mesure, adaptées à votre métier.', prix: 5000 },
+                { id: 'projet', nom: 'Création de projet', icone: '🚀', desc: 'Étude, cadrage et montage de votre projet numérique, du besoin à la mise en œuvre.', prix: 5000 },
+                { id: 'formulaire', nom: 'Formulaire en ligne (remontée de données)', icone: '📝', desc: 'Formulaires en ligne pour collecter des données sur le terrain, avec suivi et exploitation des résultats.', prix: 5000 }
+            ],
+            paiement: { numeros: clone(CONFIG.NUMEROS), qr: { wave: '', orange: '' }, lien: { wave: '', orange: '', carte: '' } },
+            users: []
+        };
+        function sanitizeCfg(c) {
+            c = c && typeof c === 'object' ? c : {};
+            var d = DEFAULT_CFG, o = { version: 1 };
+            o.annonces = arr(c.annonces).map(function (a) { a = a || {}; return { id: str(a.id, 30) || 'a' + Math.random().toString(36).slice(2, 8), titre: str(a.titre, 80), cat: str(a.cat, 20) || 'Avis', texte: str(a.texte, 400), contact: str(a.contact, 60), date: str(a.date, 10), flash: !!a.flash, pin: !!a.pin }; }).filter(function (a) { return a.titre; });
+            o.flash = arr(c.flash).map(function (x) { return str(x, 160); }).filter(Boolean);
+            o.medias = arr(c.medias).map(function (m) {
+                m = m || {};
+                return { id: str(m.id, 30), type: ['pub', 'image', 'video', 'ppt', 'pdf'].indexOf(m.type) > -1 ? m.type : 'image', titre: str(m.titre, 80), desc: str(m.desc, 200), lien: safeUrl(m.lien), url: safeUrl(m.url), local: !!m.local };
+            }).filter(function (m) { return m.id && (m.url || m.local); });
+            var f = arr(c.formules).map(function (p) { p = p || {}; return { id: str(p.id, 30) || 'f' + Math.random().toString(36).slice(2, 6), nom: str(p.nom, 60), prix: num(p.prix, 0), duree: str(p.duree, 30) }; }).filter(function (p) { return p.nom; });
+            o.formules = f.length ? f : clone(d.formules);
+            var s = arr(c.services).map(function (p) { p = p || {}; return { id: str(p.id, 30) || 's' + Math.random().toString(36).slice(2, 6), nom: str(p.nom, 80), icone: str(p.icone, 4) || '🛠️', desc: str(p.desc, 300), prix: num(p.prix, 0) }; }).filter(function (p) { return p.nom; });
+            o.services = s.length ? s : clone(d.services);
+            var pa = c.paiement || {}, nums = arr(pa.numeros).map(function (x) { return str(x, 30); }).filter(Boolean);
+            o.paiement = {
+                numeros: nums.length ? nums : clone(d.paiement.numeros),
+                qr: { wave: safeUrl((pa.qr || {}).wave), orange: safeUrl((pa.qr || {}).orange) },
+                lien: { wave: safeUrl((pa.lien || {}).wave), orange: safeUrl((pa.lien || {}).orange), carte: safeUrl((pa.lien || {}).carte) }
+            };
+            o.users = arr(c.users).map(function (u) { u = u || {}; return { id: str(u.id, 30), nom: str(u.nom, 60), login: str(u.login, 30).toLowerCase(), salt: str(u.salt, 64), hash: str(u.hash, 128), role: str(u.role, 30), perms: arr(u.perms).map(function (x) { return str(x, 20); }), actif: u.actif !== false }; }).filter(function (u) { return u.id && u.login && u.hash && u.login !== 'admin'; });
+            return o;
+        }
+        var CURRENT = clone(DEFAULT_CFG);
+
+        function renderServices() {
+            var g = $('srvGrid'), sel = $('srvSelect'), keep = sel.value; g.textContent = ''; sel.textContent = '';
+            CURRENT.services.forEach(function (s) {
+                var c = document.createElement('div'); c.className = 'srv-card';
+                var i = document.createElement('div'); i.className = 'srv-ico'; i.textContent = s.icone;
+                var h = document.createElement('h3'); h.textContent = s.nom;
+                var p = document.createElement('p'); p.textContent = s.desc;
+                var pr = document.createElement('div'); pr.className = 'srv-price'; pr.textContent = 'Acompte de réservation : ' + fcfa(s.prix);
+                var b = document.createElement('button'); b.type = 'button'; b.textContent = 'Commander';
+                b.onclick = function () { sel.value = s.id; srvTotalUpd(); $('srvForm').scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+                c.appendChild(i); c.appendChild(h); c.appendChild(p); c.appendChild(pr); c.appendChild(b); g.appendChild(c);
+                var o = document.createElement('option'); o.value = s.id; o.textContent = s.nom + ' — acompte ' + fcfa(s.prix); sel.appendChild(o);
+            });
+            if (keep) sel.value = keep;
+            if (!sel.value && sel.options.length) sel.selectedIndex = 0;
+            srvTotalUpd();
+        }
+        function service(id) { return CURRENT.services.filter(function (s) { return s.id === id; })[0] || CURRENT.services[0]; }
+        function srvTotal() { return service($('srvSelect').value).prix; }
+        var srvPay = mountPay($('srvPay'), 'srvPayMode', srvTotal);
+        function srvTotalUpd() { $('srvTotal').textContent = fcfa(srvTotal()); srvPay.update(); }
+        $('srvSelect').addEventListener('change', srvTotalUpd);
+
+        var SKEY = 'eplus_services_demandes';
+        function renderSrvMine() {
+            var box = $('srvMine'); box.textContent = '';
+            var l = lsGet(SKEY);
+            if (!l.length) { var e = document.createElement('p'); e.className = 'ext-note'; e.textContent = 'Aucune demande pour le moment.'; box.appendChild(e); return; }
+            l.slice().reverse().forEach(function (d) {
+                var c = document.createElement('article'); c.className = 'ann-card';
+                var bd = document.createElement('div'); bd.className = 'ann-badge'; bd.textContent = '⏳ En attente de vérification du paiement';
+                var h = document.createElement('h4'); h.textContent = d.service;
+                var p = document.createElement('p'); p.textContent = d.details;
+                var m = document.createElement('div'); m.className = 'ann-meta';
+                var s = document.createElement('span'); s.textContent = d.date + ' · ' + fcfa(d.montant) + ' · ' + d.mode;
+                var x = document.createElement('button'); x.className = 'ann-del'; x.type = 'button'; x.textContent = 'Annuler';
+                x.onclick = function () { lsSet(SKEY, lsGet(SKEY).filter(function (z) { return z.id !== d.id; })); renderSrvMine(); };
+                m.appendChild(s); m.appendChild(x);
+                c.appendChild(bd); c.appendChild(h); c.appendChild(p); c.appendChild(m); box.appendChild(c);
+            });
+        }
+        $('srvForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            var s = service($('srvSelect').value);
+            var d = { id: 'r' + Date.now(), nom: $('srvNom').value.trim(), contact: $('srvContact').value.trim(), service: s.nom, details: $('srvDetails').value.trim(), delai: $('srvDelai').value.trim(), montant: s.prix, mode: srvPay.mode(), payeur: srvPay.payeur.value.trim(), ref: srvPay.ref.value.trim(), date: new Date().toISOString().slice(0, 10) };
+            var l = lsGet(SKEY); l.push(d); lsSet(SKEY, l);
+            var txt = 'Bonjour EPLUS TECHNOLOGIE, je souhaite commander un service.\nNom : ' + d.nom + '\nContact : ' + d.contact + '\nService : ' + d.service + '\nBesoin : ' + d.details + (d.delai ? '\nDélai : ' + d.delai : '') +
+                '\nAcompte : ' + fcfa(d.montant) + ' via ' + d.mode + '\nPayé depuis : ' + d.payeur + '\nRéférence transaction : ' + d.ref;
+            window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(txt), '_blank', 'noopener');
+            var mail = $('srvMail');
+            mail.href = 'mailto:' + CONFIG.EMAIL + '?subject=' + encodeURIComponent('Commande de service : ' + d.service) + '&body=' + encodeURIComponent(txt);
+            mail.style.display = 'block';
+            e.target.reset(); srvTotalUpd(); renderSrvMine();
+            $('srvOk').textContent = '✅ Demande enregistrée. Envoyez-la dans WhatsApp : nous vérifions votre paiement puis vous contactons.';
+        });
+
+        function ytId(u) { var m = String(u).match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]{11})/); return m ? m[1] : null; }
+        function renderMedias() {
+            var sec = $('medias'), g = $('mediaGrid'); g.textContent = '';
+            var items = CURRENT.medias.filter(function (m) { return m.type !== 'pub'; });
+            sec.hidden = !items.length;
+            items.forEach(function (m) {
+                var c = document.createElement('div'); c.className = 'media-card';
+                var body = document.createElement('div'); body.className = 'media-body';
+                var h = document.createElement('h4'); h.textContent = m.titre || 'Sans titre'; body.appendChild(h);
+                if (m.desc) { var p = document.createElement('p'); p.textContent = m.desc; body.appendChild(p); }
+                var acts = document.createElement('div'); acts.className = 'media-actions';
+                var src = function () { return m.local ? blobURL(m.id).then(function (u) { return u || m.url; }) : Promise.resolve(m.url); };
+                if (m.type === 'image') {
+                    var im = document.createElement('img'); im.alt = m.titre; im.loading = 'lazy'; c.appendChild(im); src().then(function (u) { im.src = u; });
+                } else if (m.type === 'video') {
+                    var y = ytId(m.url);
+                    if (y) { var f = document.createElement('iframe'); f.src = 'https://www.youtube.com/embed/' + y; f.allowFullscreen = true; f.title = m.titre; c.appendChild(f); }
+                    else { var v = document.createElement('video'); v.controls = true; v.preload = 'metadata'; c.appendChild(v); src().then(function (u) { v.src = u; }); }
+                } else {
+                    var dc = document.createElement('div'); dc.className = 'media-doc'; dc.textContent = m.type === 'ppt' ? '📊' : '📄'; c.appendChild(dc);
+                    var a = document.createElement('a'); a.textContent = 'Ouvrir / Télécharger'; a.target = '_blank'; a.rel = 'noopener'; src().then(function (u) { a.href = u; });
+                    var pv = document.createElement('button'); pv.type = 'button'; pv.textContent = 'Aperçu';
+                    pv.onclick = function () {
+                        var old = c.querySelector('iframe'); if (old) { old.remove(); return; }
+                        src().then(function (u) {
+                            var abs; try { abs = new URL(u, location.href).href; } catch (e) { return; }
+                            var fr = document.createElement('iframe'); fr.title = m.titre;
+                            if (m.type === 'ppt') { if (!/^https?:/i.test(abs)) { alert('L\'aperçu PowerPoint nécessite un fichier publié en ligne.'); return; } fr.src = 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(abs); }
+                            else fr.src = abs;
+                            c.insertBefore(fr, body);
+                        });
+                    };
+                    acts.appendChild(a); acts.appendChild(pv);
+                }
+                if (m.lien) { var l = document.createElement('a'); l.href = m.lien; l.target = '_blank'; l.rel = 'noopener'; l.textContent = 'En savoir plus →'; acts.appendChild(l); }
+                body.appendChild(acts); c.appendChild(body); g.appendChild(c);
+            });
+        }
+
+        function applyConfig(c) {
+            CURRENT = sanitizeCfg(c);
+            CONFIG.PRIX = CURRENT.formules; CONFIG.NUMEROS = CURRENT.paiement.numeros; CONFIG.QR = CURRENT.paiement.qr; CONFIG.LIEN = CURRENT.paiement.lien;
+            ANNONCES_VALIDEES = CURRENT.annonces; FLASH_EXTRA = CURRENT.flash;
+            fillFormules(); updTotal(); renderAnn(); buildFlash(); renderServices(); renderMedias(); srvPay.update();
+            buildRotator(CURRENT.medias.filter(function (m) { return m.type === 'pub'; }).map(function (m) { return { id: m.id, img: m.url, local: m.local, href: m.lien, alt: m.titre }; }));
+        }
+        var DRAFT = 'eplus_cfg_draft';
+        window.EPLUS_API = {
+            getConfig: function () { return clone(CURRENT); },
+            defaults: function () { return clone(DEFAULT_CFG); },
+            sanitize: sanitizeCfg,
+            setDraft: function (c) { var s = sanitizeCfg(c); try { localStorage.setItem(DRAFT, JSON.stringify(s)); } catch (e) {} applyConfig(s); return clone(CURRENT); },
+            clearDraft: function () { try { localStorage.removeItem(DRAFT); } catch (e) {} applyConfig(DEFAULT_CFG); loadRemote(); },
+            hasDraft: function () { try { return !!localStorage.getItem(DRAFT); } catch (e) { return false; } },
+            blob: IDB, blobURL: blobURL, safeUrl: safeUrl, fcfa: fcfa
+        };
+        function loadRemote() {
+            if (!window.fetch || location.protocol.indexOf('http') !== 0) return;
+            fetch('eplus-config.json', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { if (j) applyConfig(j); }).catch(function () {});
+        }
+        var draft = null; try { draft = JSON.parse(localStorage.getItem(DRAFT) || 'null'); } catch (e) {}
+        applyConfig(draft || DEFAULT_CFG);
+        if (!draft) loadRemote();
+        renderSrvMine();
+    })();
+
+    </script>
+    <script>
+    /* ============ ESPACE SÉCURISÉ (super administrateur & espaces utilisateurs) ============ */
+    (function () {
+        'use strict';
+        var API = window.EPLUS_API; if (!API) return;
+        var ITER = 150000, IDLE = 15 * 60 * 1000, ADM = 'eplus_admin', LOCK = 'eplus_lock';
+        var PERMS = [['annonces', 'Gérer les annonces'], ['flash', 'Gérer le Flash info'], ['medias', 'Médias & publicités'], ['services', 'Services & tarifs']];
+        var TABS = [['dash', 'Tableau de bord', null], ['annonces', 'Annonces', 'annonces'], ['flash', 'Flash info', 'flash'], ['medias', 'Médias & pubs', 'medias'], ['services', 'Services & tarifs', 'services'], ['paiement', 'Paiement', '@admin'], ['users', 'Utilisateurs & accès', '@admin'], ['secu', 'Sécurité & publication', '@admin']];
+        function $(id) { return document.getElementById(id); }
+        function h(tag, attrs, kids) {
+            var e = document.createElement(tag);
+            Object.keys(attrs || {}).forEach(function (k) {
+                var v = attrs[k];
+                if (k === 'text') e.textContent = v; else if (k === 'class') e.className = v;
+                else if (k.slice(0, 2) === 'on') e.addEventListener(k.slice(2), v);
+                else if (v !== false && v != null) e.setAttribute(k, v === true ? '' : v);
+            });
+            (kids || []).forEach(function (c) { if (c != null) e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
+            return e;
+        }
+        function uid(p) { return p + Date.now().toString(36) + Math.random().toString(36).slice(2, 5); }
+        function safeName(n) { return String(n).replace(/[^\w.\-]/g, '_'); }
+
+        /* --- Cryptographie : mots de passe hachés (PBKDF2-SHA256, sel aléatoire) --- */
+        function hex(buf) { return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ('0' + b.toString(16)).slice(-2); }).join(''); }
+        function unhex(s) { var a = new Uint8Array(s.length / 2); for (var i = 0; i < a.length; i++) a[i] = parseInt(s.substr(i * 2, 2), 16); return a; }
+        function newSalt() { var a = new Uint8Array(16); crypto.getRandomValues(a); return hex(a); }
+        function derive(pw, salt) {
+            return crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveBits']).then(function (k) {
+                return crypto.subtle.deriveBits({ name: 'PBKDF2', salt: unhex(salt), iterations: ITER, hash: 'SHA-256' }, k, 256);
+            }).then(hex);
+        }
+        function safeEq(a, b) { if (a.length !== b.length) return false; var r = 0; for (var i = 0; i < a.length; i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i); return r === 0; }
+        function pwOk(p) { return p.length >= 10 && /[A-Za-z]/.test(p) && /\d/.test(p); }
+        var PWMSG = 'Mot de passe : 10 caractères minimum, avec au moins une lettre et un chiffre.';
+
+        /* --- Blocage après échecs --- */
+        function lockGet() { try { return JSON.parse(localStorage.getItem(LOCK) || '{}'); } catch (e) { return {}; } }
+        function lockLeft() { var l = lockGet(); return l.until && l.until > Date.now() ? Math.ceil((l.until - Date.now()) / 1000) : 0; }
+        function failed() { var l = lockGet(); if (l.until && l.until <= Date.now()) l = {}; l.n = (l.n || 0) + 1; if (l.n >= 5) { l.until = Date.now() + 5 * 60000; l.n = 0; } try { localStorage.setItem(LOCK, JSON.stringify(l)); } catch (e) {} }
+        function admGet() { try { return JSON.parse(localStorage.getItem(ADM) || 'null'); } catch (e) { return null; } }
+
+        /* --- État --- */
+        var overlay = null, sess = null, cfg = null, tab = 'dash', idleT = null, box = null;
+        function curUser() { return sess && sess.role === 'user' ? cfg.users.filter(function (u) { return u.id === sess.id; })[0] : null; }
+        function isAdmin() { return sess && sess.role === 'admin'; }
+        function can(p) {
+            if (!sess) return false; if (p == null) return true; if (p === '@admin') return isAdmin();
+            if (isAdmin()) return true; var u = curUser(); return !!(u && u.actif && u.perms.indexOf(p) > -1);
+        }
+        function save() { cfg = API.setDraft(cfg); }
+        function say(el, text, ok) { el.textContent = text; el.className = 'adm-msg ' + (ok ? 'ok' : 'err'); }
+
+        function resetIdle() { clearTimeout(idleT); if (sess) idleT = setTimeout(function () { logout('Session expirée par sécurité (inactivité).'); }, IDLE); }
+        function logout(msg) { sess = null; clearTimeout(idleT); if (overlay) { showLogin(msg); } }
+        function closeAll() { sess = null; clearTimeout(idleT); if (overlay) { overlay.remove(); overlay = null; } if (location.hash === '#admin') history.replaceState(null, '', location.pathname + location.search); }
+
+        function openAdmin() {
+            if (overlay) return;
+            overlay = h('div', { class: 'adm-overlay', role: 'dialog', 'aria-label': 'Espace sécurisé' });
+            box = h('div', { class: 'adm-box' }); overlay.appendChild(box); document.body.appendChild(overlay);
+            ['click', 'keydown', 'input'].forEach(function (ev) { overlay.addEventListener(ev, resetIdle); });
+            document.addEventListener('keydown', escClose);
+            showLogin();
+        }
+        function escClose(e) { if (e.key === 'Escape' && overlay) closeAll(); }
+
+        /* --- Connexion / création du compte super administrateur --- */
+        function showLogin(msg) {
+            box.textContent = '';
+            var first = !admGet();
+            var head = h('div', { class: 'adm-head' }, [h('div', {}, [h('b', { text: '🔐 Espace sécurisé' }), h('small', { text: 'EPLUS TECHNOLOGIE' })]), h('button', { type: 'button', text: 'Fermer', onclick: closeAll })]);
+            var out = h('div', { class: 'adm-msg err' }); if (msg) out.textContent = msg;
+            var form = h('form', { class: 'adm-login' });
+            if (!window.crypto || !crypto.subtle) { form.appendChild(h('div', { class: 'adm-note', text: 'Ce navigateur ne permet pas le chiffrement nécessaire. Ouvrez le site en HTTPS dans un navigateur récent.' })); box.appendChild(head); box.appendChild(form); return; }
+            if (first) {
+                form.appendChild(h('h3', { text: 'Créer le compte Super Administrateur' }));
+                form.appendChild(h('div', { class: 'adm-note', text: 'Premier accès sur cet appareil : choisissez un mot de passe solide. Il n\'est jamais enregistré en clair. ' + PWMSG }));
+                var p1 = h('input', { type: 'password', id: 'admP1', autocomplete: 'new-password', required: true }), p2 = h('input', { type: 'password', id: 'admP2', autocomplete: 'new-password', required: true });
+                form.appendChild(h('div', { class: 'adm-row' }, [h('div', {}, [h('label', { text: 'Mot de passe', for: 'admP1' }), p1])]));
+                form.appendChild(h('div', { class: 'adm-row' }, [h('div', {}, [h('label', { text: 'Confirmer', for: 'admP2' }), p2])]));
+                form.appendChild(h('button', { class: 'adm-btn', type: 'submit', text: 'Créer et entrer' })); form.appendChild(out);
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    if (!pwOk(p1.value)) return say(out, PWMSG);
+                    if (p1.value !== p2.value) return say(out, 'Les deux mots de passe sont différents.');
+                    var salt = newSalt();
+                    derive(p1.value, salt).then(function (hh) { try { localStorage.setItem(ADM, JSON.stringify({ salt: salt, hash: hh })); } catch (er) {} start({ role: 'admin' }); });
+                });
+            } else {
+                form.appendChild(h('h3', { text: 'Connexion' }));
+                var lg = h('input', { type: 'text', id: 'admLg', autocomplete: 'username', required: true, placeholder: 'admin ou identifiant utilisateur' }), pw = h('input', { type: 'password', id: 'admPw', autocomplete: 'current-password', required: true });
+                form.appendChild(h('div', { class: 'adm-row' }, [h('div', {}, [h('label', { text: 'Identifiant', for: 'admLg' }), lg])]));
+                form.appendChild(h('div', { class: 'adm-row' }, [h('div', {}, [h('label', { text: 'Mot de passe', for: 'admPw' }), pw])]));
+                form.appendChild(h('button', { class: 'adm-btn', type: 'submit', text: 'Se connecter' })); form.appendChild(out);
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    var left = lockLeft(); if (left) return say(out, 'Trop d\'essais. Réessayez dans ' + left + ' s.');
+                    var id = lg.value.trim().toLowerCase(), cfgNow = API.getConfig(), a = admGet(), user = null, salt, want, role;
+                    if (id === 'admin') { salt = a.salt; want = a.hash; role = 'admin'; }
+                    else { user = cfgNow.users.filter(function (u) { return u.login === id && u.actif; })[0]; salt = user ? user.salt : newSalt(); want = user ? user.hash : 'x'; role = 'user'; }
+                    derive(pw.value, salt).then(function (hh) {
+                        if (user || role === 'admin') { if (safeEq(hh, want)) { localStorage.removeItem(LOCK); return start(role === 'admin' ? { role: 'admin' } : { role: 'user', id: user.id }); } }
+                        failed(); say(out, 'Identifiant ou mot de passe incorrect.');
+                    });
+                });
+            }
+            box.appendChild(head); box.appendChild(form);
+            setTimeout(function () { var f = first ? $('admP1') : $('admLg'); if (f) f.focus(); }, 30);
+        }
+        function start(s) { sess = s; cfg = API.getConfig(); tab = 'dash'; resetIdle(); renderPanel(); }
+
+        /* --- Panneau --- */
+        function renderPanel() {
+            box.textContent = '';
+            var u = curUser(), who = isAdmin() ? 'Super Administrateur' : (u ? u.nom + ' · ' + (u.role || 'Utilisateur') : 'Utilisateur');
+            box.appendChild(h('div', { class: 'adm-head' }, [h('div', {}, [h('b', { text: '🔐 Espace sécurisé' }), h('small', { text: who + ' — déconnexion automatique après 15 min d\'inactivité' })]), h('button', { type: 'button', text: 'Se déconnecter', onclick: closeAll })]));
+            var tabs = h('div', { class: 'adm-tabs' });
+            TABS.forEach(function (t) { if (can(t[2])) tabs.appendChild(h('button', { type: 'button', text: t[1], class: t[0] === tab ? 'on' : '', onclick: function () { tab = t[0]; renderPanel(); } })); });
+            box.appendChild(tabs);
+            var body = h('div', { class: 'adm-body' }); box.appendChild(body);
+            var t = TABS.filter(function (x) { return x[0] === tab; })[0];
+            if (!t || !can(t[2])) { tab = 'dash'; }
+            ({ dash: tDash, annonces: tAnn, flash: tFlash, medias: tMed, services: tSrv, paiement: tPay, users: tUsers, secu: tSecu })[tab](body);
+        }
+        function field(label, input) { return h('div', {}, [h('label', { text: label }), input]); }
+        function inp(type, val, ph) { var i = h('input', { type: type, placeholder: ph || '' }); i.value = val == null ? '' : val; return i; }
+        function download(name, text) { var a = h('a', { href: URL.createObjectURL(new Blob([text], { type: 'application/json' })), download: name }); document.body.appendChild(a); a.click(); a.remove(); }
+
+        function tDash(b) {
+            b.appendChild(h('h3', { text: 'Tableau de bord' }));
+            var s = h('div', { class: 'adm-stats' });
+            [['Annonces', cfg.annonces.length], ['Flash info', cfg.flash.length], ['Médias', cfg.medias.length], ['Services', cfg.services.length]].concat(isAdmin() ? [['Utilisateurs', cfg.users.length]] : []).forEach(function (x) { s.appendChild(h('div', { class: 'adm-stat' }, [h('b', { text: String(x[1]) }), x[0]])); });
+            b.appendChild(s);
+            b.appendChild(h('div', { class: 'adm-note', text: 'Vos modifications sont enregistrées dans ce navigateur (brouillon) et visibles tout de suite ici. Pour les publier à tous les visiteurs : exportez le fichier de configuration, puis déposez-le sous le nom eplus-config.json à côté de index.html sur GitHub.' }));
+            b.appendChild(h('button', { class: 'adm-btn', type: 'button', text: '⬇️ Exporter la configuration', onclick: function () { download('eplus-config.json', JSON.stringify(API.sanitize(cfg), null, 2)); } }));
+        }
+
+        function listItem(main, sub, onDel, thumb) {
+            return h('div', { class: 'adm-item' }, [thumb || null, h('div', { class: 'grow' }, [h('b', { text: main }), h('small', { text: sub })]), h('button', { class: 'adm-btn del', type: 'button', text: 'Supprimer', onclick: onDel })]);
+        }
+
+        function tAnn(b) {
+            b.appendChild(h('h3', { text: 'Annonces publiées (après vérification du paiement)' }));
+            var t = inp('text', '', 'Titre'), c = h('select', {}, ['Emploi', 'Formation', 'Événement', 'Offre', 'Avis'].map(function (x) { return h('option', { text: x }); }));
+            var tx = h('textarea', { placeholder: 'Message', maxlength: 400 }), ct = inp('text', '', 'Contact'), fl = h('input', { type: 'checkbox' }), pn = h('input', { type: 'checkbox' }), out = h('div');
+            b.appendChild(h('div', { class: 'adm-row' }, [field('Titre', t), field('Catégorie', c), field('Contact', ct)]));
+            b.appendChild(field('Message', tx));
+            b.appendChild(h('div', { class: 'adm-perms' }, [h('label', {}, [fl, 'Aussi dans le Flash info']), h('label', {}, [pn, '★ Mise en avant (À la une)'])]));
+            b.appendChild(h('button', { class: 'adm-btn', type: 'button', text: 'Publier', onclick: function () {
+                if (!t.value.trim() || !tx.value.trim()) return say(out, 'Titre et message requis.');
+                cfg.annonces.unshift({ id: uid('a'), titre: t.value.trim(), cat: c.value, texte: tx.value.trim(), contact: ct.value.trim(), date: new Date().toISOString().slice(0, 10), flash: fl.checked, pin: pn.checked });
+                save(); renderPanel();
+            } })); b.appendChild(out);
+            b.appendChild(h('h4', { text: 'Liste' }));
+            if (!cfg.annonces.length) b.appendChild(h('p', { class: 'ext-note', text: 'Aucune annonce validée.' }));
+            cfg.annonces.forEach(function (a, i) { b.appendChild(listItem(a.titre + (a.pin ? '  ★' : ''), a.cat + ' · ' + a.date + (a.flash ? ' · Flash' : ''), function () { cfg.annonces.splice(i, 1); save(); renderPanel(); })); });
+        }
+
+        function tFlash(b) {
+            b.appendChild(h('h3', { text: 'Messages du bandeau Flash info' }));
+            b.appendChild(h('p', { class: 'ext-note', text: 'Si cette liste est vide, les messages par défaut s\'affichent.' }));
+            var m = inp('text', '', 'Message (160 caractères max)'); m.maxLength = 160;
+            b.appendChild(h('div', { class: 'adm-row' }, [field('Nouveau message', m), h('button', { class: 'adm-btn', type: 'button', text: 'Ajouter', onclick: function () { if (!m.value.trim()) return; cfg.flash.push(m.value.trim()); save(); renderPanel(); } })]));
+            cfg.flash.forEach(function (f, i) { b.appendChild(listItem(f, '', function () { cfg.flash.splice(i, 1); save(); renderPanel(); })); });
+        }
+
+        function tMed(b) {
+            b.appendChild(h('h3', { text: 'Images publicitaires, vidéos, PowerPoint, PDF' }));
+            var ty = h('select', {}, [['pub', 'Image publicitaire (bannière)'], ['image', 'Image (galerie)'], ['video', 'Vidéo'], ['ppt', 'PowerPoint'], ['pdf', 'PDF']].map(function (x) { return h('option', { value: x[0], text: x[1] }); }));
+            var ti = inp('text', '', 'Titre'), de = inp('text', '', 'Description (facultatif)'), li = inp('text', '', 'Lien au clic (facultatif)'), ur = inp('text', '', 'Adresse du fichier ou lien (YouTube accepté)');
+            var fi = h('input', { type: 'file', accept: 'image/*,video/*,.ppt,.pptx,.pdf' }), out = h('div');
+            b.appendChild(h('div', { class: 'adm-row' }, [field('Type', ty), field('Titre', ti), field('Description', de)]));
+            b.appendChild(h('div', { class: 'adm-row' }, [field('Lien de destination', li), field('Adresse en ligne', ur), field('Ou choisir un fichier', fi)]));
+            b.appendChild(h('div', { class: 'adm-note', text: 'Le fichier choisi est conservé dans ce navigateur pour l\'aperçu. Pour qu\'il soit visible par tous les visiteurs, déposez-le aussi dans le dépôt GitHub (dossier medias/) : son chemin medias/nom-du-fichier est proposé automatiquement. Vous pouvez aussi coller le lien d\'un fichier ou d\'une vidéo déjà en ligne.' }));
+            b.appendChild(h('button', { class: 'adm-btn', type: 'button', text: 'Ajouter', onclick: function () {
+                var f = fi.files[0], id = uid('m');
+                var it = { id: id, type: ty.value, titre: ti.value.trim(), desc: de.value.trim(), lien: API.safeUrl(li.value), url: API.safeUrl(ur.value) || (f ? 'medias/' + safeName(f.name) : ''), local: !!f };
+                if (!it.titre) return say(out, 'Donnez un titre.');
+                if (!it.url) return say(out, 'Indiquez une adresse ou choisissez un fichier.');
+                if (it.type === 'pub' && f && f.type.indexOf('image/') !== 0) return say(out, 'Une image publicitaire doit être une image.');
+                var go = function () { cfg.medias.push(it); save(); renderPanel(); };
+                if (f) API.blob.put(id, f).then(go, function () { it.local = false; if (!API.safeUrl(ur.value)) return say(out, 'Stockage local indisponible : collez l\'adresse en ligne du fichier.'); go(); }); else go();
+            } })); b.appendChild(out);
+            b.appendChild(h('h4', { text: 'Bibliothèque' }));
+            if (!cfg.medias.length) b.appendChild(h('p', { class: 'ext-note', text: 'Aucun média.' }));
+            var labels = { pub: 'Bannière', image: 'Image', video: 'Vidéo', ppt: 'PowerPoint', pdf: 'PDF' };
+            cfg.medias.forEach(function (m, i) {
+                var th;
+                if (m.type === 'pub' || m.type === 'image') { th = h('img', { class: 'adm-thumb', alt: '' }); (m.local ? API.blobURL(m.id) : Promise.resolve(null)).then(function (u) { th.src = u || m.url; }); }
+                else th = h('div', { class: 'adm-thumb', text: m.type === 'video' ? '🎬' : m.type === 'ppt' ? '📊' : '📄' });
+                b.appendChild(listItem(m.titre, labels[m.type] + ' · ' + m.url, function () { if (m.local) API.blob.del(m.id).catch(function () {}); cfg.medias.splice(i, 1); save(); renderPanel(); }, th));
+            });
+        }
+
+        function tSrv(b) {
+            b.appendChild(h('h3', { text: 'Services proposés (acompte de réservation en FCFA)' }));
+            cfg.services.forEach(function (s, i) {
+                var n = inp('text', s.nom), ic = inp('text', s.icone), pr = inp('number', s.prix), d = h('textarea', {}); d.value = s.desc;
+                n.addEventListener('input', function () { s.nom = n.value; }); ic.addEventListener('input', function () { s.icone = ic.value; }); pr.addEventListener('input', function () { s.prix = Number(pr.value) || 0; }); d.addEventListener('input', function () { s.desc = d.value; });
+                b.appendChild(h('div', { class: 'adm-item' }, [h('div', { class: 'grow' }, [h('div', { class: 'adm-row' }, [field('Nom', n), field('Icône', ic), field('Acompte (FCFA)', pr)]), field('Description', d)]), h('button', { class: 'adm-btn del', type: 'button', text: 'Supprimer', onclick: function () { cfg.services.splice(i, 1); save(); renderPanel(); } })]));
+            });
+            b.appendChild(h('button', { class: 'adm-btn alt', type: 'button', text: '+ Ajouter un service', onclick: function () { cfg.services.push({ id: uid('s'), nom: 'Nouveau service', icone: '🛠️', desc: '', prix: 5000 }); save(); renderPanel(); } }));
+            b.appendChild(h('h3', { text: 'Formules des annonces payantes' }));
+            cfg.formules.forEach(function (f, i) {
+                var n = inp('text', f.nom), pr = inp('number', f.prix), du = inp('text', f.duree);
+                n.addEventListener('input', function () { f.nom = n.value; }); pr.addEventListener('input', function () { f.prix = Number(pr.value) || 0; }); du.addEventListener('input', function () { f.duree = du.value; });
+                b.appendChild(h('div', { class: 'adm-item' }, [h('div', { class: 'grow' }, [h('div', { class: 'adm-row' }, [field('Formule', n), field('Prix (FCFA)', pr), field('Durée', du)])]), h('button', { class: 'adm-btn del', type: 'button', text: 'Supprimer', onclick: function () { cfg.formules.splice(i, 1); save(); renderPanel(); } })]));
+            });
+            var out = h('div');
+            b.appendChild(h('button', { class: 'adm-btn alt', type: 'button', text: '+ Ajouter une formule', onclick: function () { cfg.formules.push({ id: uid('f'), nom: 'Nouvelle formule', prix: 2000, duree: '7 jours' }); save(); renderPanel(); } }));
+            b.appendChild(h('div', { style: 'margin-top:16px' }, [h('button', { class: 'adm-btn', type: 'button', text: 'Enregistrer les tarifs', onclick: function () { save(); renderPanel(); } })])); b.appendChild(out);
+        }
+
+        function fileToData(file, cb) { var r = new FileReader(); r.onload = function () { cb(String(r.result)); }; r.readAsDataURL(file); }
+        function tPay(b) {
+            b.appendChild(h('h3', { text: 'Paiement : numéros, QR codes et liens' }));
+            var nums = h('textarea', {}); nums.value = cfg.paiement.numeros.join('\n');
+            b.appendChild(field('Numéros Wave / Orange Money (un par ligne)', nums));
+            var q = cfg.paiement.qr, l = cfg.paiement.lien, out = h('div');
+            function qrField(label, key) {
+                var fi = h('input', { type: 'file', accept: 'image/png,image/jpeg,image/webp' }), img = h('img', { class: 'pay-qr', alt: '' }); if (q[key]) img.src = q[key]; else img.style.display = 'none';
+                fi.addEventListener('change', function () { if (fi.files[0]) { if (fi.files[0].size > 400000) return say(out, 'Image trop lourde (400 Ko max).'); fileToData(fi.files[0], function (d) { q[key] = d; img.src = d; img.style.display = 'block'; }); } });
+                var clear = h('button', { class: 'adm-btn alt', type: 'button', text: 'Retirer', onclick: function () { q[key] = ''; img.style.display = 'none'; } });
+                return h('div', {}, [h('label', { text: label }), fi, img, clear]);
+            }
+            b.appendChild(h('div', { class: 'adm-row' }, [qrField('QR code Wave', 'wave'), qrField('QR code Orange Money', 'orange')]));
+            var lw = inp('text', l.wave, 'https://…'), lo = inp('text', l.orange, 'https://…'), lc = inp('text', l.carte, 'https://… (prestataire carte Visa)');
+            b.appendChild(h('div', { class: 'adm-row' }, [field('Lien de paiement Wave', lw), field('Lien Orange Money', lo), field('Lien carte Visa (prestataire sécurisé)', lc)]));
+            b.appendChild(h('div', { class: 'adm-note', text: 'Ne saisissez jamais de numéro de carte, de code secret ni de mot de passe de vos comptes ici. Seuls des liens de paiement fournis par votre opérateur ou prestataire sont acceptés.' }));
+            b.appendChild(h('button', { class: 'adm-btn', type: 'button', text: 'Enregistrer', onclick: function () {
+                cfg.paiement.numeros = nums.value.split('\n').map(function (x) { return x.trim(); }).filter(Boolean);
+                cfg.paiement.lien = { wave: lw.value.trim(), orange: lo.value.trim(), carte: lc.value.trim() };
+                save(); renderPanel();
+            } })); b.appendChild(out);
+        }
+
+        function permBoxes(sel) {
+            var wrap = h('div', { class: 'adm-perms' });
+            PERMS.forEach(function (p) { var c = h('input', { type: 'checkbox', value: p[0] }); c.checked = sel.indexOf(p[0]) > -1; wrap.appendChild(h('label', {}, [c, p[1]])); });
+            wrap.get = function () { return Array.prototype.map.call(wrap.querySelectorAll('input:checked'), function (x) { return x.value; }); };
+            return wrap;
+        }
+        function tUsers(b) {
+            b.appendChild(h('h3', { text: 'Créer un espace utilisateur' }));
+            var nm = inp('text', '', 'Nom complet'), lg = inp('text', '', 'identifiant'), pw = inp('password', '', 'Mot de passe'), ro = inp('text', '', 'Rôle (ex. Rédacteur)'), pb = permBoxes([]), out = h('div');
+            pw.autocomplete = 'new-password';
+            b.appendChild(h('div', { class: 'adm-row' }, [field('Nom', nm), field('Identifiant', lg), field('Mot de passe', pw), field('Rôle', ro)]));
+            b.appendChild(h('label', { text: 'Accès accordés' })); b.appendChild(pb);
+            b.appendChild(h('button', { class: 'adm-btn', type: 'button', text: 'Créer l\'espace', onclick: function () {
+                var login = lg.value.trim().toLowerCase();
+                if (!nm.value.trim() || !/^[a-z0-9._-]{3,30}$/.test(login)) return say(out, 'Nom requis ; identifiant de 3 à 30 caractères (lettres, chiffres, . _ -).');
+                if (login === 'admin' || cfg.users.some(function (u) { return u.login === login; })) return say(out, 'Cet identifiant est déjà utilisé.');
+                if (!pwOk(pw.value)) return say(out, PWMSG);
+                var salt = newSalt();
+                derive(pw.value, salt).then(function (hh) { cfg.users.push({ id: uid('u'), nom: nm.value.trim(), login: login, salt: salt, hash: hh, role: ro.value.trim() || 'Utilisateur', perms: pb.get(), actif: true }); save(); renderPanel(); });
+            } })); b.appendChild(out);
+            b.appendChild(h('h4', { text: 'Espaces existants' }));
+            if (!cfg.users.length) b.appendChild(h('p', { class: 'ext-note', text: 'Aucun utilisateur.' }));
+            cfg.users.forEach(function (u, i) {
+                var pbx = permBoxes(u.perms), np = inp('password', '', 'Nouveau mot de passe (facultatif)'), o2 = h('div'); np.autocomplete = 'new-password';
+                b.appendChild(h('div', { class: 'adm-item' }, [h('div', { class: 'grow' }, [
+                    h('b', { text: u.nom + ' (' + u.login + ')' }), h('small', { text: (u.role || 'Utilisateur') + ' · ' + (u.actif ? 'Actif' : 'Désactivé') }), pbx, field('Réinitialiser le mot de passe', np),
+                    h('div', { style: 'display:flex;gap:8px;flex-wrap:wrap;margin-top:8px' }, [
+                        h('button', { class: 'adm-btn', type: 'button', text: 'Enregistrer les accès', onclick: function () {
+                            var apply = function (salt, hh) { u.perms = pbx.get(); if (hh) { u.salt = salt; u.hash = hh; } save(); renderPanel(); };
+                            if (np.value) { if (!pwOk(np.value)) return say(o2, PWMSG); var s = newSalt(); derive(np.value, s).then(function (hh) { apply(s, hh); }); } else apply();
+                        } }),
+                        h('button', { class: 'adm-btn alt', type: 'button', text: u.actif ? 'Désactiver' : 'Activer', onclick: function () { u.actif = !u.actif; save(); renderPanel(); } }),
+                        h('button', { class: 'adm-btn del', type: 'button', text: 'Supprimer', onclick: function () { cfg.users.splice(i, 1); save(); renderPanel(); } })
+                    ]), o2
+                ])]));
+            });
+            b.appendChild(h('div', { class: 'adm-note', text: 'Les identifiants des utilisateurs sont inclus (mots de passe hachés) dans le fichier eplus-config.json que vous publiez. Choisissez des mots de passe longs. Pour une sécurité de niveau serveur (comptes protégés, droits appliqués côté serveur), il faut relier le site à un service d\'authentification comme Firebase Authentication.' }));
+        }
+
+        function tSecu(b) {
+            b.appendChild(h('h3', { text: 'Publication de la configuration' }));
+            b.appendChild(h('button', { class: 'adm-btn', type: 'button', text: '⬇️ Exporter eplus-config.json', onclick: function () { download('eplus-config.json', JSON.stringify(API.sanitize(cfg), null, 2)); } }));
+            var fi = h('input', { type: 'file', accept: '.json,application/json' }), o1 = h('div');
+            b.appendChild(h('h4', { text: 'Importer une configuration' }));
+            b.appendChild(fi);
+            fi.addEventListener('change', function () {
+                var f = fi.files[0]; if (!f) return; var r = new FileReader();
+                r.onload = function () { try { var j = JSON.parse(r.result); cfg = API.setDraft(j); renderPanel(); } catch (e) { say(o1, 'Fichier invalide.'); } };
+                r.readAsText(f);
+            }); b.appendChild(o1);
+            b.appendChild(h('h4', { text: 'Abandonner mes modifications locales' }));
+            b.appendChild(h('button', { class: 'adm-btn alt', type: 'button', text: 'Revenir à la version publiée', onclick: function () { API.clearDraft(); cfg = API.getConfig(); renderPanel(); } }));
+            b.appendChild(h('h3', { text: 'Changer le mot de passe du Super Administrateur' }));
+            var o = inp('password', ''), n1 = inp('password', ''), n2 = inp('password', ''), out = h('div'); [o, n1, n2].forEach(function (x) { x.autocomplete = 'off'; });
+            b.appendChild(h('div', { class: 'adm-row' }, [field('Mot de passe actuel', o), field('Nouveau', n1), field('Confirmer', n2)]));
+            b.appendChild(h('button', { class: 'adm-btn', type: 'button', text: 'Changer', onclick: function () {
+                var a = admGet(); if (!pwOk(n1.value)) return say(out, PWMSG); if (n1.value !== n2.value) return say(out, 'Confirmation différente.');
+                derive(o.value, a.salt).then(function (hh) {
+                    if (!safeEq(hh, a.hash)) return say(out, 'Mot de passe actuel incorrect.');
+                    var s = newSalt(); derive(n1.value, s).then(function (nh) { localStorage.setItem(ADM, JSON.stringify({ salt: s, hash: nh })); say(out, 'Mot de passe modifié.', true); });
+                });
+            } })); b.appendChild(out);
+            b.appendChild(h('div', { class: 'adm-note', text: 'Sécurité : le mot de passe est haché (PBKDF2-SHA256, 150 000 itérations, sel aléatoire), jamais stocké en clair ; 5 échecs bloquent la connexion 5 minutes ; la session ferme après 15 minutes d\'inactivité ; tous les textes saisis sont affichés de façon sécurisée. Limite à connaître : ce site est une page statique, donc ces protections sont côté navigateur. Le compte Super Administrateur est propre à cet appareil, et seul ce que vous exportez puis publiez devient visible par tous.' }));
+        }
+
+        var link = $('admLink'); if (link) link.addEventListener('click', function (e) { e.preventDefault(); openAdmin(); });
+        if (location.hash === '#admin') openAdmin();
+        window.addEventListener('hashchange', function () { if (location.hash === '#admin') openAdmin(); });
+    })();
     </script>
 </body>
 </html>
